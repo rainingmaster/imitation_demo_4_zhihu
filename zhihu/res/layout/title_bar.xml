@@ -13,14 +13,6 @@
 	    android:descendantFocusability="blocksDescendants"
 	    android:clickable="true"
         android:background="@drawable/image_btn" >
-	    
-	    <ImageView 
-	        android:id="@+id/lead_image" 
-	        android:src="@drawable/lead"
-	        android:layout_height="20dip" 
-	        android:layout_width="20dip"
-	        android:gravity="left"
-	        />  
 	
 	    <TextView
 	        android:id="@+id/title_text"

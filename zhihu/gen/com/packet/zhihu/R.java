@@ -67,24 +67,23 @@ public final class R {
         public static final int tt=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000e;
+        public static final int action_settings=0x7f0a000d;
+        public static final int answer_layout=0x7f0a0000;
         public static final int drawer_layout=0x7f0a0001;
         public static final int fill_line=0x7f0a0004;
-        public static final int lead_image=0x7f0a0009;
         public static final int left_drawers=0x7f0a0002;
-        public static final int main_layout=0x7f0a0000;
         public static final int menu_view=0x7f0a0005;
         public static final int menuimage=0x7f0a0006;
         public static final int menutext=0x7f0a0007;
-        public static final int pen_button=0x7f0a000d;
-        public static final int plus_button=0x7f0a000c;
-        public static final int right_button=0x7f0a000b;
+        public static final int pen_button=0x7f0a000c;
+        public static final int plus_button=0x7f0a000b;
+        public static final int right_button=0x7f0a000a;
         public static final int title_area=0x7f0a0008;
-        public static final int title_text=0x7f0a000a;
+        public static final int title_text=0x7f0a0009;
         public static final int user_bar=0x7f0a0003;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
+        public static final int answer_layout=0x7f030000;
         public static final int left_drawer=0x7f030001;
         public static final int list_item=0x7f030002;
         public static final int main_web=0x7f030003;

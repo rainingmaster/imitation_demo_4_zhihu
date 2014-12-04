@@ -16,15 +16,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 @SuppressLint("JavascriptInterface")
-public class MainActivity extends Activity {
+public class BaseActivity extends Activity {
     /**
      * 主体浏览器实体
      */
-    protected MainWindow mWebView;
+    protected WebView mWebView;
     
     /**
      * 左侧抽屉实体
@@ -55,31 +56,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		/*设置左边抽屉菜单*/
-		mleftDrawer = new LeftDrawer(this);
-		/*设置中央webview主体*/
-		mWebView = new MainWindow(this);
-		/*设置网页为背景元素*/
-		//mleftDrawer.setFirstEle(mWebView);
-		
-		mleftDrawer.setUserMess("rainmaser", R.drawable.tt);//例子，将按照用户添加
-		
-        /*设置标题栏按钮功能*/
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		
-		setContentView(mWebView);
-
-		/*设置标题栏，需要放在最后*/
-		mTitle = new Title(this);
-		mTitle.initTitleBar();
-
+		mleftDrawer=null;
 		mAppName=getResources().getString(R.string.app_name);
-		mPageName=getResources().getString(R.string.index);
-		
-		mTitle.setButtonText(mPageName);
-		
-		//toggleLeftDrawerMenu();
 	}
 
 	@Override
@@ -101,35 +79,37 @@ public class MainActivity extends Activity {
     * 对菜单与标题做一个捆绑，需要有开/关功能
     * @return 
     */
-	private void toggleLeftDrawerMenu() {
+	protected void bingdingTitleandLeftMenu() {
+		if (mleftDrawer!=null) {
 		closeSetLfMenu();
 		
-		mleftDrawer.setDrawerFun(new DrawerListener(){
-
-			@Override
-			public void onDrawerClosed(View arg0) {
-				closeSetLfMenu();
-				// TODO 自动生成的方法存根
-			}
-
-			@Override
-			public void onDrawerOpened(View arg0) {
-				// TODO 自动生成的方法存根
-				openSetLfMenu();
-			}
-
-			@Override
-			public void onDrawerSlide(View arg0, float arg1) {
-				// TODO 自动生成的方法存根
-				
-			}
-
-			@Override
-			public void onDrawerStateChanged(int arg0) {
-				// TODO 自动生成的方法存根
-				
-			}
-		});
+			mleftDrawer.setDrawerFun(new DrawerListener(){
+	
+				@Override
+				public void onDrawerClosed(View arg0) {
+					closeSetLfMenu();
+					// TODO 自动生成的方法存根
+				}
+	
+				@Override
+				public void onDrawerOpened(View arg0) {
+					// TODO 自动生成的方法存根
+					openSetLfMenu();
+				}
+	
+				@Override
+				public void onDrawerSlide(View arg0, float arg1) {
+					// TODO 自动生成的方法存根
+					
+				}
+	
+				@Override
+				public void onDrawerStateChanged(int arg0) {
+					// TODO 自动生成的方法存根
+					
+				}
+			});
+		}
 	}
 	
 	/**
@@ -137,29 +117,33 @@ public class MainActivity extends Activity {
     * @return 
     */
 	private void openSetLfMenu() {
-		mTitle.setButtonText(mAppName);
-		mTitle.setButtonFun(new OnClickListener() {
-    		@Override
-    		public void onClick(View arg0) {
-    			mleftDrawer.closeDrawer();
-    		}
-		});
-		mMenuState=false;
+		if (mleftDrawer!=null) {
+			mTitle.setButtonText(mAppName);
+			mTitle.setButtonFun(new OnClickListener() {
+	    		@Override
+	    		public void onClick(View arg0) {
+	    			mleftDrawer.closeDrawer();
+	    		}
+			});
+			mMenuState=false;
+		}
 	}
 	
-
 	/**
     * 关闭左侧抽屉菜单后的配置
     * @return 
     */
 	private void closeSetLfMenu() {
-		mTitle.setButtonText(mPageName);
-		mTitle.setButtonFun(new OnClickListener() {
-    		@Override
-    		public void onClick(View arg0) {
-    			mleftDrawer.openDrawer();
-    		}
-		});
-		mMenuState=true;
+		if (mleftDrawer!=null) {
+			mTitle.setButtonText(mPageName);
+			mTitle.setButtonFun(new OnClickListener() {
+	    		@Override
+	    		public void onClick(View arg0) {
+	    			mleftDrawer.openDrawer();
+	    		}
+			});
+			mMenuState=true;
+		}
 	}
+		
 }

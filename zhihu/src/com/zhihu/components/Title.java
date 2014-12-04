@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,12 +19,16 @@ public class Title {
 	private Activity mActivity;
 	private TextView mTitleText;
 	private LinearLayout mTitleArea;
+	private ImageView mTitleTextImg;
 	private ArrayList<HashMap<String, Object>> mTitleButtonLst;
 	
 	public Title(Activity act) {
 		this.mActivity = act;
 	}
 	
+	/**
+	 * 将本title贴上传入的activity中
+	*/
 	public boolean initTitleBar() {
 		boolean ret = true;
 		
@@ -31,6 +36,26 @@ public class Title {
 		mTitleText = (TextView) mActivity.findViewById(R.id.title_text);
 		mTitleArea = (LinearLayout) mActivity.findViewById(R.id.title_area);
 		
+		//创建可点击标志图片
+		mTitleTextImg = new ImageView(mActivity);
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(
+        		20, 
+        		20);
+        mTitleTextImg.setLayoutParams(layoutParams);//设置长高
+        mTitleTextImg.setImageResource(R.drawable.lead);
+		
+		return ret;
+	}
+	
+	/**
+	 * 将本title贴上传入的activity中
+	*/
+	public boolean initTitleBar(String titleName, boolean clickable) {
+		boolean ret = true;
+		
+		initTitleBar();
+		setButtonText(titleName);
+		setButtonClickable(clickable);
 		return ret;
 	}
 	
@@ -60,11 +85,40 @@ public class Title {
 		mTitleBtnLayout.addView(view, 0);
 	}
 	
+	/**
+     * 设置标题内容
+     */
 	public void setButtonText(String name) {
 		mTitleText.setText(name);
 	}
 	
+	/**
+     * 设置点击标题功能
+     */
 	public void setButtonFun(OnClickListener listener) {
 		mTitleArea.setOnClickListener(listener);
+	}
+	
+	/**
+     * 设置标题是否响应点击
+     * @param chose true可以响应点击   false不响应点击
+     */
+	public void setButtonClickable(boolean chose) {
+		mTitleArea.setClickable(chose);
+		if (chose) {//是否显示可点击的img
+			mTitleArea.addView(mTitleTextImg, 0);
+		}
+		else {
+			mTitleArea.removeView(mTitleTextImg);
+			mTitleArea.setPadding(20, 0, 0, 0);
+		}
+	}
+	
+	/**
+     * 获取当前是否响应点击
+     * @return true可以响应点击   false不响应点击
+     */
+	public boolean isButtonClickable() {
+		return mTitleArea.isClickable();
 	}
 }

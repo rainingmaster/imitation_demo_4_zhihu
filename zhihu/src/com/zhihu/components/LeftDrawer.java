@@ -36,6 +36,16 @@ public class LeftDrawer {
         initLeftDrawer();
 	}
 	
+	/**
+	* @param act 需要显示的activity
+	* @param usr_name 菜单显示的用户名
+	* @param resource 菜单显示的用户头像
+	*/
+	public LeftDrawer(Activity act, String usr_name, int resource) {
+		this(act);
+		setUserMess(usr_name, resource);
+	}
+	
 	public DrawerLayout initLeftDrawer() {          
         ArrayList<HashMap<String, Object>> items = getItems();
 
@@ -52,23 +62,20 @@ public class LeftDrawer {
 	}
 
 	/**
-	 * 设置无菜单时背景。需要插入到第一个元素
+	 * 设置无菜单时显示的主体。需要插入到第一个元素
 	 * @param view 带插入视图
 	 * @return
 	 */
-	public boolean setFirstEle(View view) {
+	public boolean setMainPart(View view) {
 		boolean ret = true;
+		
+		mDrawerLayout.addView(view, 0);//插入到第一个位置，即为背景
 		
 		DrawerLayout.LayoutParams layoutParams=new DrawerLayout.LayoutParams(
 				DrawerLayout.LayoutParams.MATCH_PARENT, 
 				DrawerLayout.LayoutParams.MATCH_PARENT);
 		
-		/*DrawerLayout.LayoutParams layoutParams=new DrawerLayout.LayoutParams(
-				300, 
-				300);*/
 		view.setLayoutParams(layoutParams);//设置长高
-		
-		mDrawerLayout.addView(view, 0);//插入到第一个位置，即为背景
 		
 		return ret;
 	}
