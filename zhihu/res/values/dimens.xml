@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- left drawer menu -->
+    <dimen name="user_pic">30dip</dimen>
+    <dimen name="user_height">48dip</dimen>
+    <dimen name="user_text_size">15sp</dimen>
+    <dimen name="drawer_menu_width">220dip</dimen>
+    <dimen name="divider_height">0.1dip</dimen>
+    <!-- list view node -->
+    <dimen name="drawer_menu_pic">23dip</dimen>
+    <dimen name="drawer_menu_padding">10dip</dimen>
+    <dimen name="drawer_menu_height">42dip</dimen>
+    <dimen name="drawer_menu_img_margin">8dip</dimen>
+    <dimen name="drawer_menu_text_margin">5dip</dimen>
+    <dimen name="drawer_menu_text_size">13sp</dimen>
+    
+
+</resources>
