@@ -12,12 +12,14 @@ import android.widget.Scroller;
 public class ScrollLayout extends ViewGroup{
 
     private static final String TAG = "ScrollLayout";      
-    private VelocityTracker mVelocityTracker;  			// 鐢ㄤ簬鍒ゆ柇鐢╁姩鎵嬪娍    
+    private VelocityTracker mVelocityTracker;  			// 主要用跟踪触摸屏事件（flinging事件和其他gestures手势事件）的速率    
     private static final int SNAP_VELOCITY = 600;        
     private Scroller  mScroller;						// 婊戝姩鎺у埗鍣�
     private int mCurScreen;    						    
-	private int mDefaultScreen = 0;    						 
-    private float mLastMotionX;       
+	private int mDefaultScreen = 0;//
+    private int mBorderWidth = 20;//边框宽度
+    private int mPageWidth;
+    private float mLastMotionX;
  //   private int mTouchSlop;							
     
 //    private static final int TOUCH_STATE_REST = 0;
@@ -55,37 +57,43 @@ public class ScrollLayout extends ViewGroup{
 		// TODO Auto-generated method stub		
 		 if (changed) {    
 	            int childLeft = 0;    
-	            final int childCount = getChildCount();    	                
+	            final int childCount = getChildCount();
+                int childWidth;
 	            for (int i=0; i<childCount; i++) {    
 	                final View childView = getChildAt(i);    
-	                if (childView.getVisibility() != View.GONE) {    
-	                    final int childWidth = childView.getMeasuredWidth();    
-	                    childView.layout(childLeft, 0,     
+	                if (childView.getVisibility() != View.GONE) {
+	                	childWidth = childView.getMeasuredWidth();  
+						childView.layout(childLeft, 0,     
 	                            childLeft+childWidth, childView.getMeasuredHeight());    
 	                    childLeft += childWidth;    
 	                }    
-	            }    
+	            }
+	            mPageWidth = childLeft;
 	        }    
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);		
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		final int width = MeasureSpec.getSize(widthMeasureSpec);       
 	    final int widthMode = MeasureSpec.getMode(widthMeasureSpec);      
 	    		
 		final int count = getChildCount();       
-        for (int i = 0; i < count; i++) {       
-            getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);       
+        for (int i = 0; i < count; i++) {
+        	if (getChildAt(i).getClass() == View.class) {
+        		getChildAt(i).measure(mBorderWidth, heightMeasureSpec); 
+        	}else{
+        		getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);  
+        	}
         }                
-        scrollTo(mCurScreen * width, 0);		
+        scrollTo(mCurScreen * (width + mBorderWidth), 0);
 	}
 
 	 public void snapToDestination() {    
-	        final int screenWidth = getWidth();    
+	        final int screenWidth = getWidth();
 	        final int destScreen = (getScrollX()+ screenWidth/2)/screenWidth;    
-	        snapToScreen(destScreen);    
+	        snapToScreen(destScreen);
 	 }  
 	
 	 public void snapToScreen(int whichScreen) {    	
@@ -94,7 +102,7 @@ public class ScrollLayout extends ViewGroup{
 	        if (getScrollX() != (whichScreen*getWidth())) {    	                
 	            final int delta = whichScreen*getWidth()-getScrollX();    
 	      	            mScroller.startScroll(getScrollX(), 0,
-	                    delta, 0, Math.abs(delta)*2);
+	                    delta+mBorderWidth*whichScreen, 0, Math.abs(delta)*2);
 	            
 	            mCurScreen = whichScreen;    
 	            invalidate();       // Redraw the layout    	            
@@ -182,7 +190,7 @@ public class ScrollLayout extends ViewGroup{
 		if (getScrollX() <= 0 && deltaX < 0 ){
 			return false;
 		}	
-		if  (getScrollX() >=  (getChildCount() - 1) * getWidth() && deltaX > 0){
+		if  (getScrollX() >=  mPageWidth && deltaX > 0){
 			return false;
 		}		
 		return true;

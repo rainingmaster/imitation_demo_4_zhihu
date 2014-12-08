@@ -88,11 +88,11 @@ public class QuizActivity extends Activity  implements OnViewChangeListener, OnC
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO 自动生成的方法存根
 		//((EditText) v).setInputType(InputType.TYPE_NULL); // 关闭软键盘 
-		EditText edit = (EditText) v;
+		/*EditText edit = (EditText) v;
 		int inType = edit.getInputType();
 		edit.setInputType(InputType.TYPE_NULL);
 		edit.onTouchEvent(event);
-		edit.setInputType(inType);
+		edit.setInputType(inType);*/
 		
 		mScrollLayout.onTouchEvent(event);
 		return false;
