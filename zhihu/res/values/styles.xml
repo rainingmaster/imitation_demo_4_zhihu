@@ -33,4 +33,34 @@
          <item name="android:layout_height">fill_parent</item>
      </style>
      
+     <!-- quiz page style -->
+     <style name="quizBarTitle">
+         <item name="android:layout_width">fill_parent</item>
+         <item name="android:layout_height">wrap_content</item>
+         <item name="android:layout_weight">1</item>
+         <item name="android:textColor">@color/white</item>
+         <item name="android:textSize">10sp</item>
+         <item name="android:gravity">center_horizontal</item>
+     </style>
+     
+     <style name="divideLine_horizontal">
+         <item name="android:layout_width">0.5dip</item>
+         <item name="android:layout_height">fill_parent</item>
+         <item name="android:layout_marginTop">7dip</item>
+         <item name="android:layout_marginBottom">7dip</item>
+         <item name="android:background">@color/white</item>
+         <item name="android:layout_gravity">center</item> 
+     </style>
+     
+     <style name="quizEditText">
+         <item name="android:layout_width">match_parent</item>
+         <item name="android:layout_height">match_parent</item>
+         <item name="android:padding">3dip</item>
+         <item name="android:ems">10</item>
+         <item name="android:inputType">textMultiLine</item>
+         <item name="android:textSize">10sp</item>
+         <item name="android:gravity">top</item>
+         <item name="android:background">@drawable/edittext_bg</item>
+     </style>
+     
 </resources>

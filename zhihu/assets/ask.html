@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- Site CSS -->
+<link href="style/style.css" rel="stylesheet">
+<link href="style/style_question.css" rel="stylesheet">
+<script type="text/javascript">
+var main_json;
+</script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div id="main">
+    <div id="relative">
+        <div class="topic">问题</div><div class="topic">描述</div><div class="topic">话题</div><img id="more" src="img/arrow.png" />
+    </div>
+    <div id="question_text">
+		<div id="title"></div>
+		<div id="descrip">小区那么多免费健身设备，为什么还要去健身房健身呢？</div>
+    </div>
+    <div id="descrition_text">
+		<div id="title"></div>
+		<div id="descrip">小区那么多免费健身设备，为什么还要去健身房健身呢？</div>
+    </div>
+    <div id="topic_text">
+		<div id="title"></div>
+		<div id="descrip">小区那么多免费健身设备，为什么还要去健身房健身呢？</div>
+    </div>
+    <div class="line" />
+    <div id="topic_text">
+		匿名提问
+    </div>
+</div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript">
+function sendToAndroid(str) {
+  window.AndroidFun.getFromWebView(str);
+}
+
+function getFromAndroid(obj) {
+  window.main_json=eval('('+obj+')');
+  $("#title").html(window.main_json.title);
+}
+
+$(document).ready(function(){
+  $("body").bind('swiperight', function() {
+  $.mobile.changePage("#question_text", {transition: "slide", reverse:true},false);
+}).bind('swipeleft', function() {
+   $.mobile.changePage("#descrition_text", { transition: "slide"},true);
+});
+});
+</script>
+</body>
+</html>

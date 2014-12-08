@@ -7,4 +7,6 @@
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color><!-- transparent -->
     <color name="divider">#FF777777</color><!-- the divider color -->
+    <color name="titleback">#FF333333</color><!-- the divider color -->
+    
 </resources>

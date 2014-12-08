@@ -4,7 +4,10 @@
     <string name="app_name">知乎</string>
     <string name="action_settings">设置</string>
     <string name="index">首页</string>
-    <string name="open">open</string>
-    <string name="close">close</string>
+    <string name="question">问题</string>
+    <string name="quesText">添加问题…</string>
+    <string name="describe">描述</string>
+    <string name="descText">添加问题的补充说明…</string>
+    <string name="topic">话题</string>
 
 </resources>

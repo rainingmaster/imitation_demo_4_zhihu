@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- Site CSS -->
+<link href="style/style.css" rel="stylesheet">
+<link href="style/style_question.css" rel="stylesheet">
+<script type="text/javascript">
+var main_json;
+</script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div id="main">
+    <div id="relative">
+        <div class="topic">健1111身</div><div class="topic">健康</div><div class="topic">保健</div><img id="more" src="img/arrow.png" />
+    </div>
+    <div id="titles">
+		<div id="title"></div>
+		<div id="descrip">小区那么多免费健身设备，为什么还要去健身房健身呢？</div>
+    </div>
+    <div class="line" />
+    <div id="state">
+		<div class="state_icon"><img src="img/eye.png"/><span id="focus">0</span></div>
+        <div class="state_icon"><img src="img/disc.png" /><span id="commet">0</span></div>
+        <div id="attention_btn">关注</div>
+    </div>
+    <div id="operate">
+		<div class="oper_btn" id="invite"><img src="img/add.png" />邀请回答</div><div class="oper_btn" id="addanser"><img src="img/answer.png" />添加回答</div>
+    </div>
+    <div class="answer">
+		<div class="replier">
+            <img class="photo" src="tt.png"/>
+            <div class="name">暴走的卤蛋</div>
+        </div>
+        <div class="reply">
+            <div class="agree">1.3K</div>
+            <div class="content">这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的这件事应该是这样的</div>
+        </div>
+    </div>
+    <div class="line" />
+    <div class="answer">
+		<div class="replier">
+            <img class="photo" src="tt.png"/>
+            <div class="name">暴走的卤蛋</div>
+        </div>
+        <div class="reply">
+            <div class="agree">1.3K</div>
+            <div class="content">这件事应该是这样的</div>
+        </div>
+    </div>
+    <div class="line" />
+</div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+function sendToAndroid(str) {
+  window.AndroidFun.getFromWebView(str);
+}
+
+function getFromAndroid(obj) {
+  window.main_json=eval('('+obj+')');
+  $("#title").html(window.main_json.title);
+}
+
+$(document).ready(function(){
+  $(".title").click(function(){
+      var click_id = $(this).closest(".answer").attr("id");
+      var click_title = $(this).attr("id");
+      var click_obj = '{"action":"0", "id":"'+click_id+'", "title":"'+click_title+'"}';
+      sendToAndroid(click_obj);
+  });
+});
+</script>
+</body>
+</html>

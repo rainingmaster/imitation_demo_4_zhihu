@@ -8,5 +8,6 @@
         <item>草稿</item>
         <item>搜索</item>
         <item>提问</item>
+        <item>设置</item>
     </string-array> 
 </resources>

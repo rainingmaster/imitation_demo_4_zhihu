@@ -25,6 +25,9 @@ public final class R {
         /** blue for item 
          */
         public static final int presscolor=0x7f050001;
+        /**  the divider color 
+         */
+        public static final int titleback=0x7f050007;
         public static final int transparent=0x7f050005;
         /** blue for menu button press 
          */
@@ -57,29 +60,38 @@ public final class R {
     }
     public static final class drawable {
         public static final int bg_border=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int image_btn=0x7f020002;
-        public static final int lead=0x7f020003;
-        public static final int list_btn=0x7f020004;
-        public static final int list_btn_text=0x7f020005;
-        public static final int pen=0x7f020006;
-        public static final int plus=0x7f020007;
-        public static final int tt=0x7f020008;
+        public static final int edittext_bg=0x7f020001;
+        public static final int edittext_normal=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int image_btn=0x7f020004;
+        public static final int lead=0x7f020005;
+        public static final int list_btn=0x7f020006;
+        public static final int list_btn_text=0x7f020007;
+        public static final int pen=0x7f020008;
+        public static final int plus=0x7f020009;
+        public static final int tt=0x7f02000a;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000d;
+        public static final int ScrollLayout=0x7f0a000b;
+        public static final int action_settings=0x7f0a0014;
         public static final int answer_layout=0x7f0a0000;
         public static final int drawer_layout=0x7f0a0001;
+        public static final int editText2=0x7f0a000c;
+        public static final int editTextDesc=0x7f0a000e;
+        public static final int editTextTitle=0x7f0a000d;
         public static final int fill_line=0x7f0a0004;
         public static final int left_drawers=0x7f0a0002;
         public static final int menu_view=0x7f0a0005;
         public static final int menuimage=0x7f0a0006;
         public static final int menutext=0x7f0a0007;
-        public static final int pen_button=0x7f0a000c;
-        public static final int plus_button=0x7f0a000b;
-        public static final int right_button=0x7f0a000a;
-        public static final int title_area=0x7f0a0008;
-        public static final int title_text=0x7f0a0009;
+        public static final int pen_button=0x7f0a0013;
+        public static final int plus_button=0x7f0a0012;
+        public static final int quiz_describe=0x7f0a0009;
+        public static final int quiz_question=0x7f0a0008;
+        public static final int quiz_topic=0x7f0a000a;
+        public static final int right_button=0x7f0a0011;
+        public static final int title_area=0x7f0a000f;
+        public static final int title_text=0x7f0a0010;
         public static final int user_bar=0x7f0a0003;
     }
     public static final class layout {
@@ -87,7 +99,8 @@ public final class R {
         public static final int left_drawer=0x7f030001;
         public static final int list_item=0x7f030002;
         public static final int main_web=0x7f030003;
-        public static final int title_bar=0x7f030004;
+        public static final int quiz_layout=0x7f030004;
+        public static final int title_bar=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -95,9 +108,12 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int close=0x7f070004;
+        public static final int descText=0x7f070006;
+        public static final int describe=0x7f070005;
         public static final int index=0x7f070002;
-        public static final int open=0x7f070003;
+        public static final int quesText=0x7f070004;
+        public static final int question=0x7f070003;
+        public static final int topic=0x7f070007;
     }
     public static final class style {
         /** 
@@ -112,9 +128,14 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080005;
+        public static final int AppBaseTheme=0x7f080008;
         public static final int TitleBackgroundColor=0x7f080000;
+        public static final int divideLine_horizontal=0x7f080006;
         public static final int itemBlue=0x7f080001;
+        /**  quiz page style 
+         */
+        public static final int quizBarTitle=0x7f080005;
+        public static final int quizEditText=0x7f080007;
         public static final int titleButton=0x7f080004;
         public static final int titleText=0x7f080003;
         public static final int titlestyle=0x7f080002;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dip"
+    android:orientation="horizontal"
+	android:background="@color/titleback"
+	android:gravity="center_vertical">
+	    <TextView
+	        android:id="@+id/quiz_question"
+	        android:text="@string/question"
+	        style="@style/quizBarTitle"/>
+	     <View 
+	        style="@style/divideLine_horizontal"/>
+	    <TextView
+	        android:id="@+id/quiz_describe"
+	        android:text="@string/describe"
+	        style="@style/quizBarTitle"/>
+        <View 
+            style="@style/divideLine_horizontal"/>
+	    <TextView
+	        android:id="@+id/quiz_topic"
+	        android:text="@string/topic"
+	        style="@style/quizBarTitle"/>
+    </LinearLayout>
+    <com.zhihu.components.ScrollLayout  
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/ScrollLayout"    
+      android:layout_width="fill_parent"    
+      android:layout_height="fill_parent">
+	    
+      <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+  
+      <EditText
+          android:id="@+id/editTextTitle"
+          android:hint="@string/quesText"
+          style="@style/quizEditText" >
+          <requestFocus />
+      </EditText>   
+  
+      <EditText
+          android:id="@+id/editTextDesc"
+          android:hint="@string/descText"
+          style="@style/quizEditText" >
+
+          <requestFocus />
+      </EditText>  
+          
+      <FrameLayout     
+        android:background="#654321"
+        android:layout_width="fill_parent"    
+        android:layout_height="fill_parent">      
+      </FrameLayout> 
+       
+    </com.zhihu.components.ScrollLayout>
+
+</LinearLayout>

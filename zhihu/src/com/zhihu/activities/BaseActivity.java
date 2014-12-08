@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +26,7 @@ public class BaseActivity extends Activity {
     /**
      * 主体浏览器实体
      */
-    protected WebView mWebView;
+    protected MainWindow mWebView;
     
     /**
      * 左侧抽屉实体
@@ -145,5 +146,18 @@ public class BaseActivity extends Activity {
 			mMenuState=true;
 		}
 	}
+
+    /** 
+     * 如果不做任何处理，浏览网页，点击系统“Back”键，整个Browser会调用finish()而结束自身 
+     * 如果希望浏览的网 页回退而不是退出浏览器，需要在当前Activity中处理并消费掉该Back事件。
+     *  
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {  
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {  
+        	mWebView.goBack();  
+            return true;  
+        }  
+        return super.onKeyDown(keyCode, event); 
+    }
 		
 }
