@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="40dip"
-    android:orientation="horizontal"
-	android:background="@color/titleback"
-	android:gravity="center_vertical">
+	    android:id="@+id/quiz_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dip"
+	    android:orientation="horizontal"
+		android:background="@color/titleback"
+		android:gravity="center_vertical">
 	    <TextView
 	        android:id="@+id/quiz_question"
 	        android:text="@string/question"
@@ -31,20 +32,38 @@
       android:id="@+id/ScrollLayout"    
       android:layout_width="fill_parent"    
       android:layout_height="fill_parent">
-	    
-      <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-  
-      <EditText
-          android:id="@+id/editTextTitle"
-          android:hint="@string/quesText"
-          style="@style/quizEditText" >
-          <requestFocus />
-      </EditText>   
+      
+      <RelativeLayout
+          android:id="@+id/editTitlelayout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+	      <EditText
+	          android:id="@+id/editTextTitle"
+	          android:hint="@string/quesText"
+	          style="@style/quizEditText" >
+	          <requestFocus />
+	      </EditText>
+      
+	      <LinearLayout
+	          android:layout_width="match_parent"
+	          android:layout_height="30dip"
+	          android:layout_alignParentBottom="true"
+	          android:orientation="horizontal"
+	          android:background="@color/divider"
+	          android:layout_gravity="bottom">
+	          <CheckBox
+	              android:id="@+id/checkBox"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+	              android:text="@string/anonymous" />
+	     </LinearLayout>
+      </RelativeLayout>
+
+      <View   
+        android:background="#555555"
+        android:layout_width="10dip"    
+        android:layout_height="fill_parent"/>
   
       <EditText
           android:id="@+id/editTextDesc"
@@ -53,6 +72,11 @@
 
           <requestFocus />
       </EditText>  
+
+      <View   
+        android:background="#555555"
+        android:layout_width="10dip"    
+        android:layout_height="fill_parent"/>
           
       <FrameLayout     
         android:background="#654321"

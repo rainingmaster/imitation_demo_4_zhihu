@@ -9,5 +9,6 @@
     <string name="describe">描述</string>
     <string name="descText">添加问题的补充说明…</string>
     <string name="topic">话题</string>
+    <string name="anonymous">匿名提问</string>
 
 </resources>
