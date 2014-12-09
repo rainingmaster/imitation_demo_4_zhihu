@@ -1,6 +1,7 @@
 package com.zhihu.components;
 
 import android.content.Context;
+import android.text.method.Touch;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ public class ScrollLayout extends ViewGroup{
 	private int mDefaultScreen = 0;//
     private int mBorderWidth = 20;//边框宽度
     private int mPageWidth;
+    private int mPageCount;//页数
     private float mLastMotionX;
  //   private int mTouchSlop;							
     
@@ -46,10 +48,9 @@ public class ScrollLayout extends ViewGroup{
 	
 	private void init(Context context)
 	{
-		mCurScreen = mDefaultScreen;    	  
+		mCurScreen = mDefaultScreen;
 	 //   mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();    	        
-	    mScroller = new Scroller(context); 
-	    
+	    mScroller = new Scroller(context);
 	}
 
 	@Override
@@ -62,10 +63,10 @@ public class ScrollLayout extends ViewGroup{
 	            for (int i=0; i<childCount; i++) {    
 	                final View childView = getChildAt(i);    
 	                if (childView.getVisibility() != View.GONE) {
-	                	childWidth = childView.getMeasuredWidth();  
+	                	childWidth = childView.getMeasuredWidth();
 						childView.layout(childLeft, 0,     
 	                            childLeft+childWidth, childView.getMeasuredHeight());    
-	                    childLeft += childWidth;    
+	                    childLeft += childWidth;
 	                }    
 	            }
 	            mPageWidth = childLeft;
@@ -77,14 +78,17 @@ public class ScrollLayout extends ViewGroup{
 		// TODO Auto-generated method stub
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		final int width = MeasureSpec.getSize(widthMeasureSpec);       
-	    final int widthMode = MeasureSpec.getMode(widthMeasureSpec);      
+	    final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+	    int BorderSpec = MeasureSpec.makeMeasureSpec(mBorderWidth, widthMode);
+	    mPageCount = 0;
 	    		
-		final int count = getChildCount();       
+		final int count = getChildCount();
         for (int i = 0; i < count; i++) {
-        	if (getChildAt(i).getClass() == View.class) {
-        		getChildAt(i).measure(mBorderWidth, heightMeasureSpec); 
-        	}else{
-        		getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);  
+        	if (getChildAt(i).getClass() == View.class) {//是边框
+        		getChildAt(i).measure(BorderSpec, heightMeasureSpec);
+        	}else{//是页面
+        		getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
+        		mPageCount++;
         	}
         }                
         scrollTo(mCurScreen * (width + mBorderWidth), 0);
@@ -97,12 +101,12 @@ public class ScrollLayout extends ViewGroup{
 	 }  
 	
 	 public void snapToScreen(int whichScreen) {    	
-	        // get the valid layout page    
-	        whichScreen = Math.max(0, Math.min(whichScreen, getChildCount()-1));    
-	        if (getScrollX() != (whichScreen*getWidth())) {    	                
-	            final int delta = whichScreen*getWidth()-getScrollX();    
-	      	            mScroller.startScroll(getScrollX(), 0,
-	                    delta+mBorderWidth*whichScreen, 0, Math.abs(delta)*2);
+	        // get the valid layout page
+	        whichScreen = Math.max(0, Math.min(whichScreen, mPageCount - 1));
+	        if (getScrollX() != (whichScreen*(getWidth()+mBorderWidth))) {    	                
+	            final int delta = (whichScreen*(getWidth()+mBorderWidth))-getScrollX();    
+	      	    mScroller.startScroll(getScrollX(), 0,
+	                    delta, 0, Math.abs(delta)*2);
 	            
 	            mCurScreen = whichScreen;    
 	            invalidate();       // Redraw the layout    	            
@@ -123,11 +127,31 @@ public class ScrollLayout extends ViewGroup{
 	}
 
 	@Override
+	public boolean onInterceptTouchEvent(MotionEvent event) {
+		// TODO 自动生成的方法存根
+		final int action = event.getAction(); 
+		
+		switch (action) {    
+		case MotionEvent.ACTION_DOWN:
+			onTouchEvent(event);
+			return false;
+		    
+		case MotionEvent.ACTION_MOVE:
+			onTouchEvent(event);
+			return true;  
+		case MotionEvent.ACTION_UP:
+			onTouchEvent(event);
+			return false;
+		}    	            
+		return true;    
+	}
+
+	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub           	            
 	        final int action = event.getAction();    
 	        final float x = event.getX();    
-	        final float y = event.getY();    
+	        final float y = event.getY();
 	            
 	        switch (action) {    
 	        case MotionEvent.ACTION_DOWN:
@@ -137,20 +161,20 @@ public class ScrollLayout extends ViewGroup{
 			    }
 	            if (!mScroller.isFinished()){    
 	                mScroller.abortAnimation();    
-	            }                
-	            mLastMotionX = x;	           
+	            }
+	            mLastMotionX = x;
 	            break;    
 	                
 	        case MotionEvent.ACTION_MOVE:  
-	           int deltaX = (int)(mLastMotionX - x);	           
+	           int deltaX = (int)(mLastMotionX - x);     
         	   if (IsCanMove(deltaX))
         	   {
         		 if (mVelocityTracker != null)
   		         {
   		            	mVelocityTracker.addMovement(event); 
   		         }   
-  	            mLastMotionX = x;     
-  	            scrollBy(deltaX, 0);	
+  	             mLastMotionX = x;     
+  	             scrollBy(deltaX, 0);	
         	   }
          
 	           break;    	                
@@ -167,10 +191,10 @@ public class ScrollLayout extends ViewGroup{
 	                //Log.e(TAG, "snap left");    
 	                snapToScreen(mCurScreen - 1);       
 	            } else if (velocityX < -SNAP_VELOCITY       
-	                    && mCurScreen < getChildCount() - 1) {       
+	                    && mCurScreen < mPageCount - 2) {       
 	                // Fling enough to move right       
 	                //Log.e(TAG, "snap right");    
-	                snapToScreen(mCurScreen + 1);       
+	                snapToScreen(mCurScreen + 1);
 	            } else {       
 	                snapToDestination();       
 	            }      
@@ -184,15 +208,15 @@ public class ScrollLayout extends ViewGroup{
 	        }    	            
 	        return true;    
 	}
-
+	
 	private boolean IsCanMove(int deltaX)
 	{
 		if (getScrollX() <= 0 && deltaX < 0 ){
 			return false;
-		}	
-		if  (getScrollX() >=  mPageWidth && deltaX > 0){
+		}
+		else if (getScrollX() >= (mPageWidth-getWidth()) && deltaX > 0){
 			return false;
-		}		
+		}
 		return true;
 	}
 	

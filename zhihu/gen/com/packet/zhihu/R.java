@@ -75,27 +75,29 @@ public final class R {
     }
     public static final class id {
         public static final int ScrollLayout=0x7f0a000c;
-        public static final int action_settings=0x7f0a0016;
+        public static final int action_settings=0x7f0a0018;
         public static final int answer_layout=0x7f0a0000;
         public static final int checkBox=0x7f0a000f;
         public static final int drawer_layout=0x7f0a0001;
-        public static final int editTextDesc=0x7f0a0010;
+        public static final int editDesclayout=0x7f0a0010;
+        public static final int editTextDesc=0x7f0a0011;
         public static final int editTextTitle=0x7f0a000e;
         public static final int editTitlelayout=0x7f0a000d;
+        public static final int editTopiclayout=0x7f0a0012;
         public static final int fill_line=0x7f0a0004;
         public static final int left_drawers=0x7f0a0002;
         public static final int menu_view=0x7f0a0005;
         public static final int menuimage=0x7f0a0006;
         public static final int menutext=0x7f0a0007;
-        public static final int pen_button=0x7f0a0015;
-        public static final int plus_button=0x7f0a0014;
+        public static final int pen_button=0x7f0a0017;
+        public static final int plus_button=0x7f0a0016;
         public static final int quiz_bar=0x7f0a0008;
         public static final int quiz_describe=0x7f0a000a;
         public static final int quiz_question=0x7f0a0009;
         public static final int quiz_topic=0x7f0a000b;
-        public static final int right_button=0x7f0a0013;
-        public static final int title_area=0x7f0a0011;
-        public static final int title_text=0x7f0a0012;
+        public static final int right_button=0x7f0a0015;
+        public static final int title_area=0x7f0a0013;
+        public static final int title_text=0x7f0a0014;
         public static final int user_bar=0x7f0a0003;
     }
     public static final class layout {
@@ -133,8 +135,9 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080008;
+        public static final int AppBaseTheme=0x7f080009;
         public static final int TitleBackgroundColor=0x7f080000;
+        public static final int checkBox=0x7f080008;
         public static final int divideLine_horizontal=0x7f080006;
         public static final int itemBlue=0x7f080001;
         /**  quiz page style 

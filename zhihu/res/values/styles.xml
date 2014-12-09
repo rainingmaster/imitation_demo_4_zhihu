@@ -64,4 +64,10 @@
          <item name="android:background">@drawable/edittext_bg</item>
      </style>
      
+     <style name="checkBox">
+         <item name="android:layout_width">match_parent</item>
+         <item name="android:layout_height">20dip</item>
+         <item name="android:textSize">10sp</item>
+     </style>
+     
 </resources>

@@ -54,9 +54,8 @@
 	          android:layout_gravity="bottom">
 	          <CheckBox
 	              android:id="@+id/checkBox"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-	              android:text="@string/anonymous" />
+	              android:text="@string/anonymous"
+	              style="@style/checkBox" />
 	     </LinearLayout>
       </RelativeLayout>
 
@@ -64,25 +63,39 @@
         android:background="#555555"
         android:layout_width="10dip"    
         android:layout_height="fill_parent"/>
+      	      
+      <RelativeLayout
+          android:id="@+id/editDesclayout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
   
-      <EditText
-          android:id="@+id/editTextDesc"
-          android:hint="@string/descText"
-          style="@style/quizEditText" >
-
+	      <EditText
+	          android:id="@+id/editTextDesc"
+	          android:hint="@string/descText"
+	          style="@style/quizEditText" >
           <requestFocus />
-      </EditText>  
 
-      <View   
+          </EditText>
+      
+      </RelativeLayout>
+       
+      <View
         android:background="#555555"
         android:layout_width="10dip"    
         android:layout_height="fill_parent"/>
           
-      <FrameLayout     
-        android:background="#654321"
-        android:layout_width="fill_parent"    
-        android:layout_height="fill_parent">      
-      </FrameLayout> 
+      <RelativeLayout
+          android:id="@+id/editTopiclayout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          
+	      <FrameLayout     
+	        android:background="#654321"
+	        android:layout_width="fill_parent"    
+	        android:layout_height="fill_parent">      
+	      </FrameLayout>
+	      
+	  </RelativeLayout> 
        
     </com.zhihu.components.ScrollLayout>
 
