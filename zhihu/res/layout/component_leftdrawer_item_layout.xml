@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"  
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="@drawable/list_btn"  >
+    android:background="@drawable/drawable_leftdraw_btn_bg_color"  >
 
     <ImageView
         android:id="@+id/menuimage"
@@ -19,6 +19,6 @@
 	    android:layout_height="@dimen/drawer_menu_height"
 	    android:layout_marginLeft="@dimen/drawer_menu_text_margin"
 	    android:textSize="@dimen/drawer_menu_text_size"
-        android:textColor="@drawable/list_btn_text"
+        android:textColor="@drawable/drawable_leftdraw_btn_tx_color"
 	    android:gravity="center_vertical"  />
 </LinearLayout>

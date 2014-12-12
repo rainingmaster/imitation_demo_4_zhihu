@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -59,6 +61,10 @@ public class BaseActivity extends Activity {
 		
 		mleftDrawer=null;
 		mAppName=getResources().getString(R.string.app_name);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_base_layout);
+		//setContentView(R.layout.component_titlebar_layout);
 	}
 
 	@Override
@@ -159,5 +165,35 @@ public class BaseActivity extends Activity {
         }  
         return super.onKeyDown(keyCode, event); 
     }
+
+    /** 
+     * 设置activity的标题栏 
+     * @param 标题栏对象
+     */
+	public boolean setTitle(View view) {
+		
+		LinearLayout title_layout = (LinearLayout) findViewById(R.id.base_title);
+		if (title_layout.getChildCount() > 0) {
+			title_layout.removeAllViews();
+		}
+		title_layout.addView(view);
+		
+		return true;
+	}
+
+    /** 
+     * 设置activity的内容栏
+     * @param 内容栏对象
+     */
+	public boolean setContent(View view) {
+		
+		LinearLayout title_layout = (LinearLayout) findViewById(R.id.base_content);
+		if (title_layout.getChildCount() > 0) {
+			title_layout.removeAllViews();
+		}
+		title_layout.addView(view);
+		
+		return true;
+	}
 		
 }

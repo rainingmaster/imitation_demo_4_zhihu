@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhihu.components.BaseTitleBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:fitsSystemWindows="true"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@color/base_item_color" >
     
      <LinearLayout 
         android:id="@+id/title_area" 
@@ -39,4 +40,4 @@
             android:src="@drawable/pen" />
 
     </LinearLayout>
-</LinearLayout>
+</com.zhihu.components.BaseTitleBar>

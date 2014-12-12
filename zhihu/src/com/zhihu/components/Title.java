@@ -32,7 +32,7 @@ public class Title {
 	public boolean initTitleBar() {
 		boolean ret = true;
 		
-		mActivity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);  //title_bar为自己标题栏的布局
+		mActivity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.component_titlebar_layout);  //title_bar为自己标题栏的布局
 		mTitleText = (TextView) mActivity.findViewById(R.id.title_text);
 		mTitleArea = (LinearLayout) mActivity.findViewById(R.id.title_area);
 		

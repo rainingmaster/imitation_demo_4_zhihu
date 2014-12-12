@@ -14,20 +14,20 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int base_item_color=0x7f050000;
         public static final int black=0x7f050004;
-        /** blue for focus 
-         */
-        public static final int buttoncolor=0x7f050002;
         /**  transparent 
          */
         public static final int divider=0x7f050006;
-        public static final int itemcolor=0x7f050000;
-        /** blue for item 
+        /** blue for focus 
          */
-        public static final int presscolor=0x7f050001;
+        public static final int left_draw_press_color=0x7f050002;
         /**  the divider color 
          */
-        public static final int titleback=0x7f050007;
+        public static final int quiz_bar_bg=0x7f050007;
+        /** blue for item 
+         */
+        public static final int title_press_color=0x7f050001;
         public static final int transparent=0x7f050005;
         /** blue for menu button press 
          */
@@ -42,71 +42,81 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
-        public static final int divider_height=0x7f060006;
-        public static final int drawer_menu_height=0x7f060009;
-        public static final int drawer_menu_img_margin=0x7f06000a;
-        public static final int drawer_menu_padding=0x7f060008;
+        /**  base setting 
+         */
+        public static final int base_bar_height=0x7f060002;
+        public static final int divider_height=0x7f060009;
+        public static final int drawer_menu_height=0x7f06000c;
+        public static final int drawer_menu_img_margin=0x7f06000d;
+        public static final int drawer_menu_padding=0x7f06000b;
         /**  list view node 
          */
-        public static final int drawer_menu_pic=0x7f060007;
-        public static final int drawer_menu_text_margin=0x7f06000b;
-        public static final int drawer_menu_text_size=0x7f06000c;
-        public static final int drawer_menu_width=0x7f060005;
-        public static final int user_height=0x7f060003;
+        public static final int drawer_menu_pic=0x7f06000a;
+        public static final int drawer_menu_text_margin=0x7f06000e;
+        public static final int drawer_menu_text_size=0x7f06000f;
+        public static final int drawer_menu_width=0x7f060008;
+        public static final int title_button_height=0x7f060004;
+        public static final int title_button_width=0x7f060003;
+        public static final int user_height=0x7f060006;
         /**  left drawer menu 
          */
-        public static final int user_pic=0x7f060002;
-        public static final int user_text_size=0x7f060004;
+        public static final int user_pic=0x7f060005;
+        public static final int user_text_size=0x7f060007;
     }
     public static final class drawable {
         public static final int bg_border=0x7f020000;
-        public static final int edittext_bg=0x7f020001;
-        public static final int edittext_normal=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int image_btn=0x7f020004;
-        public static final int lead=0x7f020005;
-        public static final int list_btn=0x7f020006;
-        public static final int list_btn_text=0x7f020007;
-        public static final int pen=0x7f020008;
-        public static final int plus=0x7f020009;
-        public static final int quiz_bar_bg=0x7f02000a;
-        public static final int quiz_bar_text=0x7f02000b;
+        public static final int drawable_leftdraw_btn_bg_color=0x7f020001;
+        public static final int drawable_leftdraw_btn_tx_color=0x7f020002;
+        public static final int drawable_quiz_bar_bg=0x7f020003;
+        public static final int drawable_quiz_bar_text=0x7f020004;
+        public static final int edittext_bg=0x7f020005;
+        public static final int edittext_normal=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int image_btn=0x7f020008;
+        public static final int lead=0x7f020009;
+        public static final int pen=0x7f02000a;
+        public static final int plus=0x7f02000b;
         public static final int tt=0x7f02000c;
     }
     public static final class id {
-        public static final int ScrollLayout=0x7f0a000c;
-        public static final int action_settings=0x7f0a0018;
+        public static final int ScrollLayout=0x7f0a0007;
+        public static final int action_settings=0x7f0a001a;
         public static final int answer_layout=0x7f0a0000;
-        public static final int checkBox=0x7f0a000f;
-        public static final int drawer_layout=0x7f0a0001;
-        public static final int editDesclayout=0x7f0a0010;
-        public static final int editTextDesc=0x7f0a0011;
-        public static final int editTextTitle=0x7f0a000e;
-        public static final int editTitlelayout=0x7f0a000d;
-        public static final int editTopiclayout=0x7f0a0012;
-        public static final int fill_line=0x7f0a0004;
-        public static final int left_drawers=0x7f0a0002;
-        public static final int menu_view=0x7f0a0005;
-        public static final int menuimage=0x7f0a0006;
-        public static final int menutext=0x7f0a0007;
-        public static final int pen_button=0x7f0a0017;
-        public static final int plus_button=0x7f0a0016;
-        public static final int quiz_bar=0x7f0a0008;
-        public static final int quiz_describe=0x7f0a000a;
-        public static final int quiz_question=0x7f0a0009;
-        public static final int quiz_topic=0x7f0a000b;
-        public static final int right_button=0x7f0a0015;
-        public static final int title_area=0x7f0a0013;
-        public static final int title_text=0x7f0a0014;
-        public static final int user_bar=0x7f0a0003;
+        public static final int base_content=0x7f0a0002;
+        public static final int base_title=0x7f0a0001;
+        public static final int checkBox=0x7f0a000a;
+        public static final int drawer_layout=0x7f0a0010;
+        public static final int editDesclayout=0x7f0a000b;
+        public static final int editTextDesc=0x7f0a000c;
+        public static final int editTextTitle=0x7f0a0009;
+        public static final int editTitlelayout=0x7f0a0008;
+        public static final int editTopiclayout=0x7f0a000d;
+        public static final int fill_line=0x7f0a0013;
+        public static final int left_drawers=0x7f0a0011;
+        public static final int menu_view=0x7f0a0014;
+        public static final int menuimage=0x7f0a000e;
+        public static final int menutext=0x7f0a000f;
+        public static final int pen_button=0x7f0a0019;
+        public static final int plus_button=0x7f0a0018;
+        public static final int quiz_bar=0x7f0a0003;
+        public static final int quiz_describe=0x7f0a0005;
+        public static final int quiz_question=0x7f0a0004;
+        public static final int quiz_topic=0x7f0a0006;
+        public static final int right_button=0x7f0a0017;
+        public static final int title_area=0x7f0a0015;
+        public static final int title_text=0x7f0a0016;
+        public static final int user_bar=0x7f0a0012;
     }
     public static final class layout {
-        public static final int answer_layout=0x7f030000;
-        public static final int left_drawer=0x7f030001;
-        public static final int list_item=0x7f030002;
-        public static final int main_web=0x7f030003;
-        public static final int quiz_layout=0x7f030004;
-        public static final int title_bar=0x7f030005;
+        public static final int activity_answer_layout=0x7f030000;
+        public static final int activity_base_layout=0x7f030001;
+        public static final int activity_quiz_layout=0x7f030002;
+        public static final int component_leftdrawer_item_layout=0x7f030003;
+        public static final int component_leftdrawer_layout=0x7f030004;
+        public static final int component_main_web_layout=0x7f030005;
+        public static final int component_titlebar_button_layout=0x7f030006;
+        public static final int component_titlebar_layout=0x7f030007;
+        public static final int component_titlebar_text_layout=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f090000;

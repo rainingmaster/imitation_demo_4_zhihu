@@ -28,7 +28,7 @@ public class LeftDrawer {
     
 	public LeftDrawer(Activity act) {
 		this.mActivity = act;
-		View src_view = View.inflate(mActivity, R.layout.left_drawer, null);//需要添加的layout
+		View src_view = View.inflate(mActivity, R.layout.component_leftdrawer_layout, null);//需要添加的layout
     	mDrawerLayout = (DrawerLayout) src_view.findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) src_view.findViewById(R.id.menu_view);
         mUserText = (TextView) src_view.findViewById(R.id.user_bar);
@@ -50,7 +50,7 @@ public class LeftDrawer {
         ArrayList<HashMap<String, Object>> items = getItems();
 
         // Set the adapter for the list view
-        SimpleAdapter adapter = new SimpleAdapter(mActivity, items, R.layout.list_item, 
+        SimpleAdapter adapter = new SimpleAdapter(mActivity, items, R.layout.component_leftdrawer_item_layout, 
                 new String[] {"menuimage","menutext"}, 
                 new int[] {R.id.menuimage, R.id.menutext});
         mDrawerList.setAdapter(adapter);

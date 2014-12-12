@@ -26,9 +26,9 @@
             android:layout_height="@dimen/user_height"
             android:paddingLeft="@dimen/drawer_menu_img_margin"
             android:clickable="true"
-            android:background="@drawable/list_btn"
+            android:background="@drawable/drawable_leftdraw_btn_bg_color"
 	        android:textSize="@dimen/user_text_size"
-	        android:textColor="@drawable/list_btn_text"
+	        android:textColor="@drawable/drawable_leftdraw_btn_tx_color"
 	        android:gravity="center_vertical" />
         <View 
             android:id="@+id/fill_line"

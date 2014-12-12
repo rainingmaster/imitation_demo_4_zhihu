@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="itemcolor">#0179D8</color><!--blue for item -->
-    <color name="presscolor">#0162AE</color><!--blue for focus -->
-    <color name="buttoncolor">#0280E4</color><!--blue for menu button press -->
+    <color name="base_item_color">#0179D8</color><!--blue for item -->
+    <color name="title_press_color">#0162AE</color><!--blue for focus -->
+    <color name="left_draw_press_color">#0280E4</color><!--blue for menu button press -->
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color><!-- transparent -->
     <color name="divider">#FF777777</color><!-- the divider color -->
-    <color name="titleback">#FF333333</color><!-- the divider color -->
+    <color name="quiz_bar_bg">#FF333333</color><!-- the divider color -->
     
 </resources>

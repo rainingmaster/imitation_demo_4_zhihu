@@ -3,15 +3,18 @@ package com.zhihu.activities;
 import com.packet.zhihu.R;
 import com.zhihu.components.ScrollLayout;
 import com.zhihu.components.OnViewChangeListener;
+import com.zhihu.components.Title;
+import com.zhihu.components.BaseTitleBar;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class QuizActivity extends Activity  implements OnViewChangeListener, OnClickListener{
+public class QuizActivity extends BaseActivity  implements OnViewChangeListener, OnClickListener{
 
 
 	private ScrollLayout mScrollLayout;
@@ -22,7 +25,16 @@ public class QuizActivity extends Activity  implements OnViewChangeListener, OnC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.quiz_layout);
+        
+        mPageName = "提问";
+
+        BaseTitleBar title_view = (BaseTitleBar)View.inflate(this, R.layout.component_titlebar_layout, null);
+        setTitle(title_view);
+        //title_view.setTitleText(mPageName);//部属上才能调整
+        
+        View content_view = View.inflate(this, R.layout.activity_quiz_layout, null);
+        setContent(content_view);
+        
         init();
     }
     

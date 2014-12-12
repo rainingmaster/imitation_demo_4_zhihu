@@ -6,9 +6,9 @@
     <LinearLayout
 	    android:id="@+id/quiz_bar"
 	    android:layout_width="match_parent"
-	    android:layout_height="40dip"
+	    android:layout_height="@dimen/base_bar_height"
 	    android:orientation="horizontal"
-		android:background="@color/titleback"
+		android:background="@color/quiz_bar_bg"
 		android:gravity="center_vertical">
 	    <TextView
 	        android:id="@+id/quiz_question"

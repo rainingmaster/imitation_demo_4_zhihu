@@ -38,8 +38,8 @@
          <item name="android:layout_width">fill_parent</item>
          <item name="android:layout_height">fill_parent</item>
          <item name="android:layout_weight">1</item>
-         <item name="android:textColor">@drawable/quiz_bar_text</item>
-         <item name="android:background">@drawable/quiz_bar_bg</item>
+         <item name="android:textColor">@drawable/drawable_quiz_bar_text</item>
+         <item name="android:background">@drawable/drawable_quiz_bar_bg</item>
          <item name="android:textSize">10sp</item>
          <item name="android:gravity">center</item>
      </style>
