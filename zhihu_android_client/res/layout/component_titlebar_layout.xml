@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhihu.components.BaseTitleBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/base_bar_height"
+    android:orientation="horizontal"
+    android:background="@color/base_item_color" >
+    
+     <LinearLayout 
+        android:id="@+id/title_area" 
+	    android:layout_width="wrap_content"  
+	    android:layout_height="@dimen/base_bar_height"
+	    android:gravity="center_vertical"
+	    android:descendantFocusability="blocksDescendants"
+	    android:clickable="true"
+        android:background="@drawable/image_btn"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+    
+    <LinearLayout
+    android:id="@+id/right_button"
+    android:layout_width="wrap_content"  
+    android:layout_height="@dimen/base_bar_height"
+    android:gravity="right"
+    android:orientation="horizontal" > 
+
+    </LinearLayout>
+</com.zhihu.components.BaseTitleBar>
