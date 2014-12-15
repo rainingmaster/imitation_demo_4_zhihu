@@ -1,48 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 左边抽屉菜单栏 -->
-<android.support.v4.widget.DrawerLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
+<com.zhihu.components.LeftDrawer  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/black"
-    android:padding="0dip" >
-
-    <!-- The main content view -->
-    <!-- main content must be the first element of DrawerLayout because it will be drawn first and drawer must be on top of it -->
+    android:background="@color/black">
 
     <!-- 第一个元素，默认为背景主体 -->
     <!-- 将动态插入 -->
     
     <!-- 第二个元素，即为抽屉对象 -->
-    <LinearLayout 
-        android:id="@+id/left_drawers"
-	    android:orientation="vertical"
-	    android:layout_width="@dimen/drawer_menu_width"
-	    android:layout_height="fill_parent"
-        android:layout_gravity="left" >
-        <TextView 
-            android:id="@+id/user_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/user_height"
-            android:paddingLeft="@dimen/drawer_menu_img_margin"
-            android:clickable="true"
-            android:background="@drawable/drawable_leftdraw_btn_bg_color"
-	        android:textSize="@dimen/user_text_size"
-	        android:textColor="@drawable/drawable_leftdraw_btn_tx_color"
-	        android:gravity="center_vertical" />
-        <View 
-            android:id="@+id/fill_line"
-            android:background="@color/divider"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/divider_height"/>
-	    <ListView
-	        android:id="@+id/menu_view"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:background="@color/white"
-	        android:cacheColorHint="@color/white"
-	        android:choiceMode="singleChoice"
-	        android:divider="@color/divider"
-	        android:dividerHeight="@dimen/divider_height" /> 
+    <!-- 将自动插入 -->
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="@dimen/drawer_menu_width"
+    android:layout_height="fill_parent"
+    android:layout_gravity="left"
+    android:background="@color/white" >
+    
     </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+</com.zhihu.components.LeftDrawer>

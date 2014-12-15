@@ -1,7 +1,7 @@
 package com.zhihu.activities;
 
 import com.packet.zhihu.R;
-import com.zhihu.components.Title;
+import com.zhihu.components.BaseTitleBar;
 import com.zhihu.components.LeftDrawer;
 import com.zhihu.components.MainWindow;
 
@@ -33,12 +33,12 @@ public class BaseActivity extends Activity {
     /**
      * 左侧抽屉实体
      */
-    protected LeftDrawer mleftDrawer;
+    protected LeftDrawer mLeftDrawer;
     
     /**
      * 标题实体
      */
-    protected Title mTitle;
+    protected BaseTitleBar mTitle;
     
     /**
      * 左侧菜单状态，true为打开
@@ -54,6 +54,16 @@ public class BaseActivity extends Activity {
     * 本页面的名字
     */
     protected String mPageName;
+
+	/**
+    * 页面标题布局
+    */
+    protected LinearLayout mTitleLayout;
+
+	/**
+    * 页面内容布局
+    */
+    protected LinearLayout mContentLayout;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +73,8 @@ public class BaseActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_base_layout);
+		mTitle = (BaseTitleBar)View.inflate(this, R.layout.component_titlebar_layout, null);
+        setTitle(mTitle);
 		//setContentView(R.layout.component_titlebar_layout);
 	}
 
@@ -86,10 +98,10 @@ public class BaseActivity extends Activity {
     * @return 
     */
 	protected void bingdingTitleandLeftMenu() {
-		if (mleftDrawer!=null) {
+		if (mLeftDrawer!=null) {
 		closeSetLfMenu();
 		
-			mleftDrawer.setDrawerFun(new DrawerListener(){
+			mLeftDrawer.setDrawerFun(new DrawerListener(){
 	
 				@Override
 				public void onDrawerClosed(View arg0) {
@@ -123,12 +135,12 @@ public class BaseActivity extends Activity {
     * @return 
     */
 	private void openSetLfMenu() {
-		if (mleftDrawer!=null) {
-			mTitle.setButtonText(mAppName);
-			mTitle.setButtonFun(new OnClickListener() {
+		if (mLeftDrawer!=null) {
+			mTitle.setTitleText(mAppName);
+			mTitle.setTitleTextFun(new OnClickListener() {
 	    		@Override
 	    		public void onClick(View arg0) {
-	    			mleftDrawer.closeDrawer();
+	    			mLeftDrawer.closeDrawer();
 	    		}
 			});
 			mMenuState=false;
@@ -140,12 +152,12 @@ public class BaseActivity extends Activity {
     * @return 
     */
 	private void closeSetLfMenu() {
-		if (mleftDrawer!=null) {
-			mTitle.setButtonText(mPageName);
-			mTitle.setButtonFun(new OnClickListener() {
+		if (mLeftDrawer!=null) {
+			mTitle.setTitleText(mPageName);
+			mTitle.setTitleTextFun(new OnClickListener() {
 	    		@Override
 	    		public void onClick(View arg0) {
-	    			mleftDrawer.openDrawer();
+	    			mLeftDrawer.openDrawer();
 	    		}
 			});
 			mMenuState=true;
@@ -173,11 +185,17 @@ public class BaseActivity extends Activity {
      */
 	public boolean setTitle(View view) {
 		
-		LinearLayout title_layout = (LinearLayout) findViewById(R.id.base_title);
-		if (title_layout.getChildCount() > 0) {
-			title_layout.removeAllViews();
+		mTitleLayout = (LinearLayout) findViewById(R.id.base_title);
+		if (mTitleLayout.getChildCount() > 0) {
+			mTitleLayout.removeAllViews();
 		}
-		title_layout.addView(view);
+		mTitleLayout.addView(view);
+		
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(
+				DrawerLayout.LayoutParams.MATCH_PARENT, 
+				DrawerLayout.LayoutParams.MATCH_PARENT);
+		
+		view.setLayoutParams(layoutParams);//设置长高
 		
 		return true;
 	}
@@ -188,11 +206,17 @@ public class BaseActivity extends Activity {
      */
 	public boolean setContent(View view) {
 		
-		LinearLayout title_layout = (LinearLayout) findViewById(R.id.base_content);
-		if (title_layout.getChildCount() > 0) {
-			title_layout.removeAllViews();
+		mContentLayout = (LinearLayout) findViewById(R.id.base_content);
+		if (mContentLayout.getChildCount() > 0) {
+			mContentLayout.removeAllViews();
 		}
-		title_layout.addView(view);
+		mContentLayout.addView(view);
+		
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(
+				DrawerLayout.LayoutParams.MATCH_PARENT, 
+				DrawerLayout.LayoutParams.MATCH_PARENT);
+		
+		view.setLayoutParams(layoutParams);//设置长高
 		
 		return true;
 	}

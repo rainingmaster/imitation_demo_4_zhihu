@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView 
+        android:id="@+id/user_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_height"
+        android:paddingLeft="@dimen/drawer_menu_img_margin"
+        android:clickable="true"
+        android:background="@drawable/drawable_leftdraw_btn_bg_color"
+        android:textSize="@dimen/user_text_size"
+        android:textColor="@drawable/drawable_leftdraw_btn_tx_color"
+        android:gravity="center_vertical" />
+    <View 
+        android:id="@+id/fill_line"
+        android:background="@color/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/divider_height"/>
+    <ListView
+        android:id="@+id/menu_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:cacheColorHint="@color/white"
+        android:choiceMode="singleChoice"
+        android:divider="@color/divider"
+        android:dividerHeight="@dimen/divider_height" /> 
+</LinearLayout>

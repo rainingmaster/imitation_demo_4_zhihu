@@ -6,60 +6,93 @@ import java.util.HashMap;
 import com.packet.zhihu.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class LeftDrawer {
-	
-    private String[] mMenuTitles;
-	private Activity mActivity;
-    private ListView mDrawerList;
-    private TextView mUserText;
-    
-    private DrawerLayout mDrawerLayout;
-    
-	public LeftDrawer(Activity act) {
-		this.mActivity = act;
-		View src_view = View.inflate(mActivity, R.layout.component_leftdrawer_layout, null);//需要添加的layout
-    	mDrawerLayout = (DrawerLayout) src_view.findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) src_view.findViewById(R.id.menu_view);
-        mUserText = (TextView) src_view.findViewById(R.id.user_bar);
-        
-        initLeftDrawer();
-	}
+public class LeftDrawer extends DrawerLayout{
 	
 	/**
-	* @param act 需要显示的activity
-	* @param usr_name 菜单显示的用户名
-	* @param resource 菜单显示的用户头像
-	*/
-	public LeftDrawer(Activity act, String usr_name, int resource) {
-		this(act);
-		setUserMess(usr_name, resource);
-	}
-	
-	public DrawerLayout initLeftDrawer() {          
-        ArrayList<HashMap<String, Object>> items = getItems();
+	 * 菜单标题数组
+	 */
+    private String[] mMenuTitles;
+    
+    /**
+	 * 调用本控件的上下文
+	 */
+	private Context mContext;
+    
+    /**
+	 * 左侧菜单内容
+	 */
+	private View mLeftMenu;
+    
+    /**
+	 * 左侧菜单layout
+	 */
+	private LinearLayout mLeftLayout;
+    
+    /**
+	 * 左侧菜单列表
+	 */
+    private ListView mDrawerList;
+    
+    /**
+	 * 左侧菜单用户信息
+	 */
+    private TextView mUserText;
+    
+    public LeftDrawer(Context context) {
+        super(context, null);
+        initLeftDrawer(context);
+    }
+
+    public LeftDrawer(Context context, AttributeSet attrs) {
+    	super(context, attrs, 0);
+        initLeftDrawer(context);
+    }
+
+    public LeftDrawer(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        initLeftDrawer(context);
+    }
+    
+	public void initLeftDrawer(Context context) {
+		mContext = context;
+		
+		mLeftMenu = View.inflate(mContext, R.layout.component_leftdrawer_leftmenu_layout, null);//需要添加的layout
+        mDrawerList = (ListView) mLeftMenu.findViewById(R.id.menu_view);
+        mUserText = (TextView) mLeftMenu.findViewById(R.id.user_bar);
+        
+        ArrayList<HashMap<String, Object>> items = getMenuItems();
 
         // Set the adapter for the list view
-        SimpleAdapter adapter = new SimpleAdapter(mActivity, items, R.layout.component_leftdrawer_item_layout, 
+        SimpleAdapter adapter = new SimpleAdapter(mContext, items, R.layout.component_leftdrawer_item_layout, 
                 new String[] {"menuimage","menutext"}, 
                 new int[] {R.id.menuimage, R.id.menutext});
         mDrawerList.setAdapter(adapter);
         
-        mDrawerList.setSelection(0);;//默认选中第一个
-        
-        return mDrawerLayout;
-        
+        //mDrawerList.setSelection(0);//默认选中第一个
 	}
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO 自动生成的方法存根
+		((LinearLayout) getChildAt(1)).removeAllViews();
+		((LinearLayout) getChildAt(1)).addView(mLeftMenu);//添加菜单部分
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+}
 
 	/**
 	 * 设置无菜单时显示的主体。需要插入到第一个元素
@@ -69,7 +102,7 @@ public class LeftDrawer {
 	public boolean setMainPart(View view) {
 		boolean ret = true;
 		
-		mDrawerLayout.addView(view, 0);//插入到第一个位置，即为背景
+		addView(view, 0);//插入到第一个位置，即为背景
 		
 		DrawerLayout.LayoutParams layoutParams=new DrawerLayout.LayoutParams(
 				DrawerLayout.LayoutParams.MATCH_PARENT, 
@@ -88,13 +121,13 @@ public class LeftDrawer {
 	 */
 	public boolean setUserMess(String usrName, int recourse) {
 		boolean ret = true;
-		Resources r = mActivity.getResources();
+		Resources r = mContext.getResources();
 		float length = r.getDimension(R.dimen.user_pic);
 		float padding = r.getDimension(R.dimen.drawer_menu_img_margin);
 		
 		mUserText.setText(usrName);
 		
-		Drawable drawable = mActivity.getResources().getDrawable(recourse);
+		Drawable drawable = mContext.getResources().getDrawable(recourse);
 		drawable.setBounds(0, 0, (int)length, (int)length);//必须设置图片大小，否则不显示
 		mUserText.setCompoundDrawables(drawable, null, null, null);
 		mUserText.setCompoundDrawablePadding((int)padding);
@@ -105,9 +138,9 @@ public class LeftDrawer {
      * 取得用于ListView的数据
      * @return
      */
-    private ArrayList<HashMap<String, Object>> getItems() {
+    private ArrayList<HashMap<String, Object>> getMenuItems() {
         ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-        mMenuTitles = mActivity.getResources().getStringArray(R.array.menulist);
+        mMenuTitles = mContext.getResources().getStringArray(R.array.menulist);
         for (int i = 0; i < mMenuTitles.length; i++) {
             //***********************************************
             //* 每一个map中的数据对应与ListView中的一个item *
@@ -133,24 +166,20 @@ public class LeftDrawer {
      * @param listener 监听实现对象
      */
     public void setDrawerFun(DrawerListener listener) {
-    	mDrawerLayout.setDrawerListener(listener);
+    	setDrawerListener(listener);
     }
     
     /**
      * 显示左边抽屉菜单
      */
     public void openDrawer() {
-    	mDrawerLayout.openDrawer(Gravity.LEFT);
+    	openDrawer(Gravity.LEFT);
     }
     
     /**
      * 隐藏左边抽屉菜单
      */
     public void closeDrawer() {
-    	mDrawerLayout.closeDrawer(Gravity.LEFT);
-    }
-    
-    public DrawerLayout getDrawerlayout() {
-    	return mDrawerLayout;
+    	closeDrawer(Gravity.LEFT);
     }
 }

@@ -4,14 +4,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.packet.zhihu.R;
+import com.zhihu.components.BaseTitleBar;
 import com.zhihu.components.LeftDrawer;
 import com.zhihu.components.MainWindow;
-import com.zhihu.components.Title;
 import com.zhihu.activities.QuestionActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -23,28 +24,26 @@ public class IndexActivity extends BaseActivity {
 		// TODO 自动生成的方法存根
 		
 		/*设置本页标题名称*/
-		mPageName=getResources().getString(R.string.index);	
-		
-		/*设置左边抽屉菜单*/
-		mleftDrawer = new LeftDrawer(this, "rainmaser", R.drawable.tt);
+		mPageName=getResources().getString(R.string.index);
 		
 		/*设置中央webview主体*/
 		mWebView = new MainWindow(this);
 		mWebView.loadUrl("file:///android_asset/index.html");
 		mWebView.setmGetWebHandle("onGetWebView");
 		
+		
+		/*设置左边抽屉菜单*/
+		mLeftDrawer = (LeftDrawer) View.inflate(this, R.layout.component_leftdrawer_layout, null);
+		mLeftDrawer.setUserMess("rainmaser", R.drawable.tt);
 		/*设置网页为背景元素*/
-		mleftDrawer.setMainPart(mWebView);
-		
-        /*设置标题栏按钮功能*/
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		
-		setContentView(mleftDrawer.getDrawerlayout());
+		mLeftDrawer.setMainPart(mWebView);
 
-		/*设置标题栏，需要放在最后*/
-		mTitle = new Title(this);
-		mTitle.initTitleBar(mPageName, true);
-		
+		setContent(mLeftDrawer);
+
+		/*设置标题栏*/
+		mTitle.setTitleText(mPageName);//部属上才能调整
+		mTitle.setTextClickable(true);
+        
 		/*捆绑标题和菜单之间功能*/
 		bingdingTitleandLeftMenu();
 	}

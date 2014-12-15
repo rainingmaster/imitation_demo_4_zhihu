@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ public class BaseTitleBar extends LinearLayout {
 	private ViewGroup mViewModle;
 	private TextView mTitleText;
 	private String mTitle;
+	private OnClickListener mListener;
+	private boolean mClickable;
 	private ImageView mClickTag;
 	
 	public BaseTitleBar(Context context) {
@@ -53,10 +56,13 @@ public class BaseTitleBar extends LinearLayout {
 	private void initTitleTextModle() {
 		mTextModle = (ViewGroup) getChildAt(0);//第一个layout为Text部分
 		mTextModle.removeAllViews();
-		
-		changeTextClickable();
+
 		mTitleText = (TextView)View.inflate(mContext, R.layout.component_titlebar_text_layout, null);
 		changeTitleText();//设置mTitleText内容
+		
+		changeTextClickable();
+		changeTitleTextFun();
+		
 		mTextModle.addView(mTitleText);
 	}
 
@@ -112,11 +118,29 @@ public class BaseTitleBar extends LinearLayout {
 	}
 	
 	/**
+     * 设置标题点击功能
+     * @param 点击标题功能
+     */
+	public void setTitleTextFun(OnClickListener listener) {
+		mListener = listener;
+		if(mTextModle != null){
+			changeTitleTextFun();
+		}
+	}
+	
+	/**
+     * 实际改变点击标题功能
+    */
+	private void changeTitleTextFun() {
+		mTextModle.setOnClickListener(mListener);
+	}
+	
+	/**
      * 设置标题是否响应点击
      * @param chose true可以响应点击   false不响应点击
      */
 	public void setTextClickable(boolean chose) {
-		mTextModle.setClickable(chose);
+		mClickable = chose;
 		if (mTextModle != null && mTitleText != null) {
 			changeTextClickable();
 		}
@@ -127,7 +151,8 @@ public class BaseTitleBar extends LinearLayout {
      * @param chose true可以响应点击   false不响应点击
      */
 	private void changeTextClickable() {
-		if (mTextModle.isClickable()) {//是否显示可点击的tag
+		mTextModle.setClickable(mClickable);
+		if (mClickable) {//是否显示可点击的tag
 			mTextModle.addView(mClickTag, 0);
 		}
 		else {

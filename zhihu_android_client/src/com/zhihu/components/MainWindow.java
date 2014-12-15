@@ -75,6 +75,25 @@ public class MainWindow extends WebView {
 		this.mGetWebHandle = mGetWebHandle;
 	}
 
+	@Override
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+		// TODO 自动生成的方法存根
+		super.onScrollChanged(l, t, oldl, oldt);
+		float webcontent = getContentHeight()*getScale();//webview的高度                
+		float webnow = getHeight()+ getScrollY();//当前webview的高度 
+		if (( webcontent - webnow) == 0){
+			//已经处于底端    
+			//lay_bottom_layout.setVisibility(View.VISIBLE);显示控件
+			Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
+		              
+		} else {
+			//lay_bottom_layout.setVisibility(View.GONE);//隐藏控件    
+		}/*
+		//已经处于顶端                
+		if (getScaleY() == 0) {
+		 }*/
+	}
+
 	private Handler mHandler = new Handler();
     
 	/**
