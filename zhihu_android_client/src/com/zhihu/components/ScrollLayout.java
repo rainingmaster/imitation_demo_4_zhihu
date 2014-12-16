@@ -186,7 +186,7 @@ public class ScrollLayout extends ViewGroup{
 	            	mVelocityTracker.computeCurrentVelocity(1000);  
 	            	velocityX = (int) mVelocityTracker.getXVelocity();
 	            }	               	                
-	            if (velocityX > SNAP_VELOCITY && mCurScreen > 0) {       
+	            if (velocityX > SNAP_VELOCITY && mCurScreen > 0) {
 	                // Fling enough to move left       
 	                //Log.e(TAG, "snap left");    
 	                snapToScreen(mCurScreen - 1);       

@@ -12,6 +12,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -30,6 +32,7 @@ public class MainWindow extends WebView {
 	protected Activity mActivity;
 	protected String mGetWebHandle;
 	protected String mBeginningData;
+	protected float mDownY;
 	
     @SuppressWarnings("deprecation")
 	public MainWindow(Activity act) {
@@ -81,17 +84,39 @@ public class MainWindow extends WebView {
 		super.onScrollChanged(l, t, oldl, oldt);
 		float webcontent = getContentHeight()*getScale();//webview的高度                
 		float webnow = getHeight()+ getScrollY();//当前webview的高度 
-		if (( webcontent - webnow) == 0){
+		if (webcontent == webnow){
 			//已经处于底端    
 			//lay_bottom_layout.setVisibility(View.VISIBLE);显示控件
-			Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mActivity, "on the bottom", Toast.LENGTH_SHORT).show();
 		              
 		} else {
 			//lay_bottom_layout.setVisibility(View.GONE);//隐藏控件    
-		}/*
+		}
 		//已经处于顶端                
-		if (getScaleY() == 0) {
+		/*if (getScaleY() == 0) {
+			//Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
+			float a = getScaleY();
 		 }*/
+	}
+
+	/**
+	 * 对比按下和画出的点以及当前位置判断下拉刷新动作
+	 */
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO 自动生成的方法存根    	            
+        final int action = event.getAction();
+
+        switch (action) {
+        case MotionEvent.ACTION_DOWN:
+        	event.getRawY();
+        	break;    	              
+        case MotionEvent.ACTION_MOVE:
+        	break;
+	    case MotionEvent.ACTION_UP: 
+        	break;
+        }
+		return super.onTouchEvent(event);
 	}
 
 	private Handler mHandler = new Handler();

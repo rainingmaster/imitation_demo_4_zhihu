@@ -31,23 +31,115 @@
         <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
         <div class="line"></div>
     </div>
+    
+    <div id="1003" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1004" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1005" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1006" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1007" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1008" class="answer">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="line"></div>
+    </div>
 </div>
-<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
 function sendToAndroid(str) {
   window.AndroidFun.getFromWebView(str);
 }
 
-function getFromAndroid(str) {
-  alert(str);
+function getFromAndroid(obj) {
+  window.main_json=eval('('+obj+')');
+  $("#title").html(window.main_json.title);
 }
+
+function addRow(json_row) {
+}
+
+function getQues(json) {
+	//for (var i = 0; i < json.length; i ++) {
+	/*for(var i in json){
+		alert(i);
+		var title = json[i].title;
+		var content = json[i].content;
+		alert(title);
+		alert(content);
+	}*/
+		var title = json.title;
+		var content = json.content;
+		alert(title);
+		alert(content);
+}
+
+function refresh() {
+	var cont = "test";
+	$.ajax({
+		url:'http://localhost/service/index_service.php',
+		type:'post',
+		dataType:'json',
+		data:cont,
+		success:function(data){
+			var json = eval(data);
+			getQues(json);
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			alert(errorThrown);
+        }
+	});
+}
+
 $(document).ready(function(){
-  $(".title").click(function(){
+	//refresh();
+  /*$(".title").click(function(){
       var click_id = $(this).closest(".answer").attr("id");
       var click_title = $(this).text();
       var click_obj = '{"action":"1", "id":"'+click_id+'", "title":"'+click_title+'"}';
       sendToAndroid(click_obj);
-  });
+  });*/
 });
 </script>
 </body>
