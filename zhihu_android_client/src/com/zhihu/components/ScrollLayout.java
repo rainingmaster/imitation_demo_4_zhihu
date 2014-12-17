@@ -112,7 +112,7 @@ public class ScrollLayout extends ViewGroup{
 	            invalidate();       // Redraw the layout    	            
 	            if (mOnViewChangeListener != null)
 	            {
-	            	mOnViewChangeListener.OnViewChange(mCurScreen);
+	            	mOnViewChangeListener.onViewChange(mCurScreen);
 	            }
 	        }    
 	    }    

@@ -1,5 +1,17 @@
 package com.zhihu.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
 import com.packet.zhihu.R;
 import com.zhihu.components.ScrollLayout;
 import com.zhihu.components.OnViewChangeListener;
@@ -10,6 +22,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +49,16 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
         setContent(content_view);
         
         init();
+        
+        CheckBox test = (CheckBox)findViewById(R.id.checkBox);
+        test.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				sentHttpClient();
+			}
+		});
     }
     
     private void init()
@@ -79,7 +104,7 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
     }
 
     @Override
-	public void OnViewChange(int view) {
+	public void onViewChange(int view) {
 		// TODO Auto-generated method stub
 		setCurPoint(view);
 	}
@@ -90,5 +115,44 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 		int pos = (Integer)(v.getTag());
 		setCurPoint(pos);
 		mScrollLayout.snapToScreen(pos);
-	} 
+	}
+	
+	private void sentHttpClient() {
+		/*声明网址字符串*/
+        String uriAPI = "http://localhost/service/quiz_service.php";
+        /*建立HTTP Post联机*/
+        HttpPost httpRequest = new HttpPost(uriAPI); 
+        /*获得内容*/
+        EditText title = (EditText) findViewById(R.id.editTextTitle);
+        EditText content = (EditText) findViewById(R.id.editTextDesc);
+        /*
+         * Post运作传送变量必须用NameValuePair[]数组储存
+        */
+        List <NameValuePair> params = new ArrayList <NameValuePair>(); 
+        params.add(new BasicNameValuePair("title", title.getText().toString().trim()));
+        params.add(new BasicNameValuePair("content", content.getText().toString().trim()));
+        try 
+        { 
+          /*发出HTTP request*/
+          httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8)); 
+          /*取得HTTP response*/
+          HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest); 
+          /*若状态码为200 ok*/
+          if(httpResponse.getStatusLine().getStatusCode() == 200)  
+          { 
+            /*取出响应字符串*/
+            String strResult = EntityUtils.toString(httpResponse.getEntity()); 
+            //mTextView1.setText(strResult); 
+          } 
+          else 
+          { 
+            //mTextView1.setText("Error Response: "+httpResponse.getStatusLine().toString()); 
+          } 
+        }
+        catch (Exception e) 
+        {  
+          //mTextView1.setText(e.getMessage().toString()); 
+          e.printStackTrace();  
+        }  
+	}
 }

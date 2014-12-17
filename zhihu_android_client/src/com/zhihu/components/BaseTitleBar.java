@@ -85,7 +85,7 @@ public class BaseTitleBar extends LinearLayout {
 		mViewModle = (ViewGroup) getChildAt(1);//第二个layout为view部分
 		mViewModle.removeAllViews();
 		
-		/*ImageButton btn1 = (ImageButton) View.inflate(mContext, R.layout.component_titlebar_view_layout, null);
+		ImageButton btn1 = (ImageButton) View.inflate(mContext, R.layout.component_titlebar_view_layout, null);
 		btn1.setImageResource(R.drawable.plus);
 		ImageButton btn2 = (ImageButton) View.inflate(mContext, R.layout.component_titlebar_view_layout, null);
 		btn2.setImageResource(R.drawable.pen);
@@ -93,7 +93,7 @@ public class BaseTitleBar extends LinearLayout {
 		mViewModle.addView(btn1);
 		mViewModle.addView(btn2);
 
-		TextView test = (TextView)View.inflate(mContext, R.layout.component_titlebar_text_layout, null);
+		/*TextView test = (TextView)View.inflate(mContext, R.layout.component_titlebar_text_layout, null);
 		//changeTitleText();//设置mTitleText内容
 		test.setText("发布");
 		mViewModle.addView(test);*/

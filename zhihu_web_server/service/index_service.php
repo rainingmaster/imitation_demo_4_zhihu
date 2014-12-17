@@ -1,5 +1,6 @@
-<?php
-	header("Access-Control-Allow-Origin:*");//ÆôÓÃCORS£¬ÔÊĞí¿çÕ¾·ÃÎÊ
+ï»¿<?php
+	header("Access-Control-Allow-Origin:*");//å¯ç”¨CORSï¼Œå…è®¸è·¨ç«™è®¿é—®
+	header("Content-Type:text/html;charset=utf-8");
 	class User{
 		public $name;
 		public $photo;
@@ -9,25 +10,44 @@
 			$this->photo = $photo;
 		}
 	}
+	
+	class Answer{
+		public $id;
+		public $content;
+		public $agree_count;
+		
+		function  __construct($content, $agree_count){
+			$this->content =  $content;
+			$this->agree_count = $agree_count;
+		}
+	}
+	
 	class User_Interested_Question{
+		public $id;
 		public $title;
 		public $content;
-		public $action;//0-ÔŞÍ¬£»1-¹Ø×¢£»2-Ìá³ö; 3-»Ø´ğ
+		public $action;//0-èµåŒï¼›1-å…³æ³¨ï¼›2-æå‡º; 3-å›ç­”
 		public $user;
+		public $answer;
 		
-		function  __construct($title, $content, $action, $user){
+		function  __construct($id, $title, $content, $action, $user, $answer=null){
+			$this->id =  $id;
 			$this->title =  $title;
 			$this->content = $content;
 			$this->action =  $action;
 			$this->user = $user;
+			$this->answer = $answer;
+			
 		}
 	}
 	
-	$an = new User("answer", "http://localhost/img/tt.png");//ĞèÒªÏêÏ¸url
+	$usr = new User("answer", "http://localhost/img/tt.png");//éœ€è¦è¯¦ç»†url
+	
+	$an = new Answer("è¿™æ˜¯ä¸€ä¸ªç­”æ¡ˆ", 34);
 	
 	$title = "why sun is so far";
 	$content = "blablablablablablablablabla";
-	$usr_ques = new User_Interested_Question($title, $content, 1, $an);
+	$usr_ques = new User_Interested_Question(10032, $title, $content, 0, $usr, $an);
 	
 	$ques = json_encode($usr_ques);
 	echo $ques;

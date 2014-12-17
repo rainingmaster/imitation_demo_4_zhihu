@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -44,6 +44,71 @@
 		</div>
         <div class="line"></div>
     </div>
+    
+    <div id="1003" class="push">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="answer">
+            <div class="a_count">3</div>
+            <div class="a_text">1好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上</div>
+		</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1003" class="push">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="answer">
+            <div class="a_count">3</div>
+            <div class="a_text">1好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上</div>
+		</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1003" class="push">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="answer">
+            <div class="a_count">3</div>
+            <div class="a_text">1好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上</div>
+		</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1003" class="push">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="answer">
+            <div class="a_count">3</div>
+            <div class="a_text">1好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上</div>
+		</div>
+        <div class="line"></div>
+    </div>
+    
+    <div id="1003" class="push">
+        <div class="introduce">
+            <a class="user" href="#">飞雪连天22</a><span class="action">关注该问题</span>
+            <img class="photo" src="test.jpg" />
+        </div>
+        <div class="title">为什么网页能居中,如果标题很长很长出现两行怎么能够保证包含所有标题呢!!</div>
+        <div class="answer">
+            <div class="a_count">3</div>
+            <div class="a_text">1好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上好好好学习天天向上</div>
+		</div>
+        <div class="line"></div>
+    </div>
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
@@ -60,31 +125,31 @@ function addRow(json_row) {
     //生成各项div
     var all_div = $('<div id="'+json_row.id+'" class="push"></div>');
     var introduce_div = $('<div class="introduce"></div>');
-    var user_a = $('<a class="user" href="#">'+json_row.user+'</a>');
+    var user_a = $('<a class="user" href="#">'+json_row.user.name+'</a>');
     var action_str;
-    switch(json_row.action) {
-        case "0":
+    switch(parseInt(json_row.action)) {
+        case 0:
             action_str = "赞同该回答";
             break;
-        case "1":
+        case 1:
             action_str = "关注了该问题";
             break;
-        case "2":
+        case 2:
             action_str = "提出了该问题";
             break;
-        case "3":
+        case 3:
             action_str = "回答了该问题";
             break;
         default:
             break;
     }
     var action_span = $('<span class="action">'+action_str+'</span>');
-    var photo_img = $('<img class="photo" src="test.jpg" />')
+    var photo_img = $('<img class="photo" src="'+json_row.user.photo+'" />')
     var title_div = $('<div class="title">'+json_row.title+'</div>');
-    if (json_row.action == "0") {
+    if (parseInt(json_row.action) == 0) {
         var answer_div = $('<div class="answer"></div>');
-        var count_div = $('<div class="a_count">'+json_row.answer.count+'</div>');
-        var text_div = $('<div class="a_text">'+json_row.answer.text+'</div>');
+        var count_div = $('<div class="a_count">'+json_row.answer.agree_count+'</div>');
+        var text_div = $('<div class="a_text">'+json_row.answer.content+'</div>');
         answer_div.append(count_div);
         answer_div.append(text_div);
     }
@@ -118,7 +183,7 @@ function getQues(json) {
 		alert(content);
 }
 
-function refresh() { //刷新页面，将从服务端获得最新/更多内容
+function refresh(time) { //刷新页面，将从服务端获得最新/更多内容
 	var cont = "test";
 	$.ajax({
 		url:'http://localhost/service/index_service.php',
@@ -127,7 +192,8 @@ function refresh() { //刷新页面，将从服务端获得最新/更多内容
 		data:cont,
 		success:function(data){
 			var json = eval(data);
-			getQues(json);
+			//getQues(json);
+			addRow(json);
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
 			alert(errorThrown);
@@ -136,6 +202,7 @@ function refresh() { //刷新页面，将从服务端获得最新/更多内容
 }
 
 function getNew() {//获取最新，将在顶部
+	refresh("new");
 }
 
 function addNew(json) {//将获取到的内容从顶部加入
@@ -143,6 +210,7 @@ function addNew(json) {//将获取到的内容从顶部加入
 }
 
 function getMore() {//获取更多，将在底部加入
+	refresh("more");
 }
 
 function addMore(json) {//将获取到的内容从底部加入
@@ -151,12 +219,12 @@ function addMore(json) {//将获取到的内容从底部加入
 
 $(document).ready(function(){
     /********测试区域*********/
-    alert("wati");
+    /*alert("wati");
 	var str = '{"id":"10032", "title":"111222title", "user":"yushi", "action":"0", "answer":{"count":"3", "text":"这是个好问题啊！"}}';
     var json = eval('(' + str + ')');
     alert(json);
     alert(json.title);
-    addRow(json);
+    addRow(json);*/
     /********end 测试区域*********/
     
     /*$(".title").click(function(){
@@ -168,7 +236,7 @@ $(document).ready(function(){
     
     $(document).scroll( function() { //判断拉到底部时的动作
         if($(document).scrollTop() + $(window).height() >= $(document).height()){//判断到底，可能需要增加一定缓冲范围刷新
-            //getmore();refresh()//获取更多
+            getMore();//获取更多
         }
     } );
 });
