@@ -12,7 +12,7 @@
 	class User_Interested_Question{
 		public $title;
 		public $content;
-		public $action;//0-赞同；1-关注；2-提出
+		public $action;//0-赞同；1-关注；2-提出; 3-回答
 		public $user;
 		
 		function  __construct($title, $content, $action, $user){

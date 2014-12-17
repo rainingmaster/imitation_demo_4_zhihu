@@ -1,10 +1,10 @@
-.answer {
+.push {
   width: 100%;
   height: auto;
   color: #777777;
   font-size: 10px;
 }
-.introduce,.title,.content {
+.introduce,.title,.answer {
   padding-left:10px;
   padding-right:10px;
   padding-top:4px;
@@ -48,13 +48,13 @@
   background:#0280E4;
 }
 
-.content {
+.answer {
   width: auto;
   height: auto;
   overflow:hidden;/*由于用了float,为了让子元素撑满父元素*/
   padding-bottom:8px;
 }
-.content  .c_count {
+.answer  .a_count {
   position: absolute;
   width: 23px;
   color: #FFFFFF;
@@ -64,18 +64,18 @@
   padding-left: auto;
   padding-right: auto;
 }
-.content .c_text{
+.answer .a_text{
   float: left;
   width: auto;
   margin-left:30px;
 }
-.content:active {
+.answer:active {
   background:#0280E4;
 }
-.content:active .c_count {
+.answer:active .a_count {
   color: #0280E4;
   background:#FFFFFF;
 }
-.content:active .c_text {
+.answer:active .a_text {
   color: #FFFFFF;
 }

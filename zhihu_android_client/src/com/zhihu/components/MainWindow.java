@@ -33,6 +33,8 @@ public class MainWindow extends WebView {
 	protected String mGetWebHandle;
 	protected String mBeginningData;
 	protected float mDownY;
+	protected float REFRESH = 30;
+	protected boolean mFreshState = true;
 	
     @SuppressWarnings("deprecation")
 	public MainWindow(Activity act) {
@@ -78,44 +80,31 @@ public class MainWindow extends WebView {
 		this.mGetWebHandle = mGetWebHandle;
 	}
 
-	@Override
-	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-		// TODO 自动生成的方法存根
-		super.onScrollChanged(l, t, oldl, oldt);
-		float webcontent = getContentHeight()*getScale();//webview的高度                
-		float webnow = getHeight()+ getScrollY();//当前webview的高度 
-		if (webcontent == webnow){
-			//已经处于底端    
-			//lay_bottom_layout.setVisibility(View.VISIBLE);显示控件
-			Toast.makeText(mActivity, "on the bottom", Toast.LENGTH_SHORT).show();
-		              
-		} else {
-			//lay_bottom_layout.setVisibility(View.GONE);//隐藏控件    
-		}
-		//已经处于顶端                
-		/*if (getScaleY() == 0) {
-			//Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
-			float a = getScaleY();
-		 }*/
-	}
-
 	/**
 	 * 对比按下和画出的点以及当前位置判断下拉刷新动作
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO 自动生成的方法存根    	            
-        final int action = event.getAction();
-
-        switch (action) {
-        case MotionEvent.ACTION_DOWN:
-        	event.getRawY();
-        	break;    	              
-        case MotionEvent.ACTION_MOVE:
-        	break;
-	    case MotionEvent.ACTION_UP: 
-        	break;
-        }
+		// TODO 自动生成的方法存根 
+		if (mFreshState) {//本touch为刷新而生
+	        final int action = event.getAction();
+	
+	        switch (action) {
+	        case MotionEvent.ACTION_DOWN:
+	        	if(getScrollY() == 0) {
+	        		mDownY = event.getY();
+	        		Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
+	        	}
+	        	break;    	              
+	        case MotionEvent.ACTION_MOVE:
+	        	float mMoveY = event.getY();
+	        	if (mMoveY - mDownY >= REFRESH && getScrollY() == 0) {
+	        		Toast.makeText(mActivity, "fresh", Toast.LENGTH_SHORT).show();//refresh_new;
+	        		return true;
+	        	}
+	        	break;
+	        }
+		}
 		return super.onTouchEvent(event);
 	}
 
