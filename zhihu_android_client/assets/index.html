@@ -121,7 +121,7 @@ function getFromAndroid(obj) {
   $("#title").html(window.main_json.title);
 }
 
-function addRow(json_row) {
+function initRow(json_row) {
     //生成各项div
     var all_div = $('<div id="'+json_row.id+'" class="push"></div>');
     var introduce_div = $('<div class="introduce"></div>');
@@ -165,7 +165,7 @@ function addRow(json_row) {
         all_div.append(answer_div);
     all_div.append(line_div);
     
-    $("#main").append(all_div);
+    return all_div;
 }
 
 function getQues(json) {
@@ -183,17 +183,20 @@ function getQues(json) {
 		alert(content);
 }
 
-function refresh(time) { //刷新页面，将从服务端获得最新/更多内容
+function refresh(tag) { //刷新页面，将从服务端获得最新/更多内容
 	var cont = "test";
 	$.ajax({
-		url:'http://localhost/service/index_service.php',
+		url:'http://192.168.30.38/service/index_service.php',
 		type:'post',
 		dataType:'json',
 		data:cont,
 		success:function(data){
 			var json = eval(data);
-			//getQues(json);
-			addRow(json);
+			if (tag == "more") {
+                addMore(json);
+            } else {
+                addNew(json);
+            }
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
 			alert(errorThrown);
@@ -206,7 +209,11 @@ function getNew() {//获取最新，将在顶部
 }
 
 function addNew(json) {//将获取到的内容从顶部加入
-    
+    var new_row;
+    for(var i = 0; i < json.length; i++) {
+        new_row = initRow(json[i]);
+        $("#main").prepend(new_row);//加到顶部
+    }
 }
 
 function getMore() {//获取更多，将在底部加入
@@ -214,7 +221,11 @@ function getMore() {//获取更多，将在底部加入
 }
 
 function addMore(json) {//将获取到的内容从底部加入
-    
+    var new_row;
+    for(var i = 0; i < json.length; i++) {
+        new_row = initRow(json[i]);
+        $("#main").append(new_row);//加到底部
+    }
 }
 
 $(document).ready(function(){

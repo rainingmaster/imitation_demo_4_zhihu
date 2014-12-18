@@ -119,7 +119,7 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 	
 	private void sentHttpClient() {
 		/*声明网址字符串*/
-        String uriAPI = "http://localhost/service/quiz_service.php";
+        String uriAPI = "http://192.168.30.38/service/quiz_service.php";
         /*建立HTTP Post联机*/
         HttpPost httpRequest = new HttpPost(uriAPI); 
         /*获得内容*/
@@ -138,7 +138,8 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
           /*取得HTTP response*/
           HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest); 
           /*若状态码为200 ok*/
-          if(httpResponse.getStatusLine().getStatusCode() == 200)  
+          int code = httpResponse.getStatusLine().getStatusCode();
+          if(code == 200)
           { 
             /*取出响应字符串*/
             String strResult = EntityUtils.toString(httpResponse.getEntity()); 

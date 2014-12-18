@@ -41,15 +41,21 @@
 		}
 	}
 	
-	$usr = new User("answer", "http://localhost/img/tt.png");//需要详细url
+	$usr = new User("answer", "http://192.168.30.38/img/tt.png");//需要完整url
 	
 	$an = new Answer("这是一个答案", 34);
+	$an2 = new Answer("这是一个答案", "113k");
 	
 	$title = "why sun is so far";
 	$content = "blablablablablablablablabla";
-	$usr_ques = new User_Interested_Question(10032, $title, $content, 0, $usr, $an);
+	$usr_ques0 = new User_Interested_Question(10032, $title, $content, 0, $usr, $an);
+	$usr_ques1 = new User_Interested_Question(10032, $title, $content, 0, $usr, $an2);
+    
+    $ar_usr = array();
+    $ar_usr[0] = $usr_ques0;
+    $ar_usr[1] = $usr_ques1;
 	
-	$ques = json_encode($usr_ques);
+	$ques = json_encode($ar_usr);
 	echo $ques;
 	//var_dump($ques);
 	
