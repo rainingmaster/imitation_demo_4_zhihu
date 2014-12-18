@@ -41,7 +41,7 @@
 		}
 	}
 	
-	$usr = new User("answer", "http://192.168.30.38/img/tt.png");//需要完整url
+	$usr = new User("answer", "http://".$_SERVER['SERVER_ADDR']."/img/tt.png");//需要完整url
 	
 	$an = new Answer("这是一个答案", 34);
 	$an2 = new Answer("这是一个答案", "113k");

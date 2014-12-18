@@ -121,6 +121,10 @@ function getFromAndroid(obj) {
   $("#title").html(window.main_json.title);
 }
 
+function initGlobalVal() {
+	IP_ADDR = "192.168.0.101";
+}
+
 function initRow(json_row) {
     //生成各项div
     var all_div = $('<div id="'+json_row.id+'" class="push"></div>');
@@ -186,7 +190,7 @@ function getQues(json) {
 function refresh(tag) { //刷新页面，将从服务端获得最新/更多内容
 	var cont = "test";
 	$.ajax({
-		url:'http://192.168.30.38/service/index_service.php',
+		url:'http://'+IP_ADDR+'/service/index_service.php',
 		type:'post',
 		dataType:'json',
 		data:cont,
@@ -244,7 +248,7 @@ $(document).ready(function(){
       var click_obj = '{"action":"1", "id":"'+click_id+'", "title":"'+click_title+'"}';
       sendToAndroid(click_obj);
     });*/
-    
+    initGlobalVal();
     $(document).scroll( function() { //判断拉到底部时的动作
         if($(document).scrollTop() + $(window).height() >= $(document).height()){//判断到底，可能需要增加一定缓冲范围刷新
             getMore();//获取更多
