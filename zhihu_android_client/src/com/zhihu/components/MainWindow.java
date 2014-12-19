@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.packet.zhihu.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -35,6 +37,7 @@ public class MainWindow extends WebView {
 	protected float mDownY;
 	protected float REFRESH = 30;
 	protected boolean mFreshState = true;
+	protected String mServerIP;
 	
     @SuppressWarnings("deprecation")
 	public MainWindow(Activity act) {
@@ -43,6 +46,7 @@ public class MainWindow extends WebView {
     	this.mActivity = act;
     	this.mGetWebHandle = null;
     	this.mBeginningData = null;
+    	this.mServerIP = getResources().getString(R.string.server_ip);
 
         requestFocus();
         setWebViewClient(new MyWebViewClient());
@@ -61,6 +65,8 @@ public class MainWindow extends WebView {
         addJavascriptInterface(myJavaScriptInterface,"AndroidFun");
         
         setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//»•µÙ∞◊±ﬂ
+        
+        loadUrl("javascript:initGlobalVal('" + mServerIP + "')");//‰Ø¿¿∆˜…Ë÷√≥ı÷µ
         
 	}
     

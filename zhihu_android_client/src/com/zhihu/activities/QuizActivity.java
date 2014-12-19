@@ -35,12 +35,14 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 	private TextView[] mTextViews;
 	private int mPageCount;
 	private int mCurSel;
+	private String mServerIP;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         mPageName = "添加问题";
+        mServerIP = getResources().getString(R.string.server_ip);
 
         mTitle.setTitleText(mPageName);//部属上才能调整
 		mTitle.setTextClickable(false);
@@ -119,7 +121,7 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 	
 	private void sentHttpClient() {
 		/*声明网址字符串*/
-        String uriAPI = "http://192.168.30.38/service/quiz_service.php";
+        String uriAPI = "http://" + mServerIP + "/service/quiz_service.php";
         /*建立HTTP Post联机*/
         HttpPost httpRequest = new HttpPost(uriAPI); 
         /*获得内容*/
