@@ -53,24 +53,7 @@ var main_json;
     <div class="line" />
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript">
-function sendToAndroid(str) {
-  window.AndroidFun.getFromWebView(str);
-}
-
-function getFromAndroid(obj) {
-  window.main_json=eval('('+obj+')');
-  $("#title").html(window.main_json.title);
-}
-
-$(document).ready(function(){
-  $(".title").click(function(){
-      var click_id = $(this).closest(".answer").attr("id");
-      var click_title = $(this).attr("id");
-      var click_obj = '{"action":"0", "id":"'+click_id+'", "title":"'+click_title+'"}';
-      sendToAndroid(click_obj);
-  });
-});
-</script>
+<script type="text/javascript" src="js/js_common.js"></script>
+<script type="text/javascript" src="js/js_question.js"></script>
 </body>
 </html>

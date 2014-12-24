@@ -1,7 +1,8 @@
 .push {
   width: 100%;
   height: auto;
-  color: #777777;
+  color: #979797;
+  background:#FFFFFF;
   font-size: 10px;
 }
 .introduce,.title,.answer {
@@ -13,26 +14,21 @@
   width: auto;
   height: auto;
   overflow:hidden;/*由于用了float,为了让子元素撑满父元素*/
-  background:#FFFFFF;
 }
 .introduce  .user {
-  color: #138CEC;
+  color: #66B2E2;
   float:left;
 }
+.introduce .touch {
+  color: #FFFFFF !important;
+}
 .introduce  .action {
-  color: #777777;
   float:left;
 }
 .introduce  .photo {
   width: 15px;
   height: 15px;
   float:right;
-}
-.introduce:active {
-  background:#0280E4;
-}
-.introduce:active  .user,.introduce:active  .action {
-  color: #FFFFFF;
 }
 
 .title {
@@ -42,10 +38,6 @@
   font-size: 13px;
   clear: both;
   /*border: 1px solid red;*/
-}
-.title:active {
-  color: #FFFFFF;
-  background:#0280E4;
 }
 
 .answer {
@@ -58,24 +50,18 @@
   position: absolute;
   width: 23px;
   color: #FFFFFF;
-  background-color: #138CEC;
+  background-color: #66B2E2;
   border-radius: 3px;  /*圆角*/
   text-align: center;
   padding-left: auto;
   padding-right: auto;
 }
+.answer .touch {
+  color: #1F8EEA !important;
+  background-color: #FFFFFF !important;
+}
 .answer .a_text{
   float: left;
   width: auto;
   margin-left:30px;
-}
-.answer:active {
-  background:#0280E4;
-}
-.answer:active .a_count {
-  color: #0280E4;
-  background:#FFFFFF;
-}
-.answer:active .a_text {
-  color: #FFFFFF;
 }

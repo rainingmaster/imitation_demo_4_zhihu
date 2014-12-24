@@ -2,7 +2,10 @@ package com.zhihu.components;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +20,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -32,21 +36,15 @@ import android.widget.Toast;
 public class MainWindow extends WebView {
 	
 	protected Activity mActivity;
-	protected String mGetWebHandle;
-	protected String mBeginningData;
-	protected float mDownY;
-	protected float REFRESH = 30;
-	protected boolean mFreshState = true;
-	protected String mServerIP;
+	protected Map<String,String> mBeginningData;
 	
     @SuppressWarnings("deprecation")
 	public MainWindow(Activity act) {
 		super(act);
 		// TODO 自动生成的构造函数存根
     	this.mActivity = act;
-    	this.mGetWebHandle = null;
-    	this.mBeginningData = null;
-    	this.mServerIP = getResources().getString(R.string.server_ip);
+    	this.mBeginningData = new HashMap<String, String>();
+    	mBeginningData.put("ip", getResources().getString(R.string.server_ip));
 
         requestFocus();
         setWebViewClient(new MyWebViewClient());
@@ -65,53 +63,23 @@ public class MainWindow extends WebView {
         addJavascriptInterface(myJavaScriptInterface,"AndroidFun");
         
         setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//去掉白边
-        
-        loadUrl("javascript:initGlobalVal('" + mServerIP + "')");//浏览器设置初值
+        setOnLongClickListener(new OnLongClickListener() {//屏蔽长按功能
+			
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO 自动生成的方法存根
+				return true;
+			}
+		});
         
 	}
     
-	public String getmBeginningData() {
+	public Map<String,String> getBeginningData() {
 		return mBeginningData;
 	}
 
-	public void setmBeginningData(String mBeginningData) {
+	public void setBeginningData(Map<String,String> mBeginningData) {
 		this.mBeginningData = mBeginningData;
-	}
-
-	public String getmGetWebHandle() {
-		return mGetWebHandle;
-	}
-
-	public void setmGetWebHandle(String mGetWebHandle) {
-		this.mGetWebHandle = mGetWebHandle;
-	}
-
-	/**
-	 * 对比按下和画出的点以及当前位置判断下拉刷新动作
-	 */
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		// TODO 自动生成的方法存根 
-		if (mFreshState) {//本touch为刷新而生
-	        final int action = event.getAction();
-	
-	        switch (action) {
-	        case MotionEvent.ACTION_DOWN:
-	        	if(getScrollY() == 0) {
-	        		mDownY = event.getY();
-	        		Toast.makeText(mActivity, "on the top", Toast.LENGTH_SHORT).show();
-	        	}
-	        	break;    	              
-	        case MotionEvent.ACTION_MOVE:
-	        	float mMoveY = event.getY();
-	        	if (mMoveY - mDownY >= REFRESH && getScrollY() == 0) {
-	        		Toast.makeText(mActivity, "fresh", Toast.LENGTH_SHORT).show();//refresh_new;
-	        		return true;
-	        	}
-	        	break;
-	        }
-		}
-		return super.onTouchEvent(event);
 	}
 
 	private Handler mHandler = new Handler();
@@ -121,22 +89,24 @@ public class MainWindow extends WebView {
 	 */
     final class JavaScriptInterface {
     	Context mContext;
+    	
     	JavaScriptInterface(Context c) {
 	        mContext = c;
 	    }
+    	
         /** 
          * 该方法被浏览器端调用，从浏览器获取内容 
          */  
-        public void getFromWebView(final String json) {
-        	if (json!=null) {
+        public void getFromWebView(final String funName, final String data) {
+        	if (funName != null) {
             mHandler.post(new Runnable() {  
 	                public void run() {
 						Method exec;
 	                	try {
-	                		if (mGetWebHandle!=null) {
-								JSONObject obj = new JSONObject(json);//转换为json
-								exec = mActivity.getClass().getMethod(mGetWebHandle, JSONObject.class);
-			                	exec.invoke(mActivity, obj);
+	                		JSONObject obj = new JSONObject(data);//转换为json
+							exec = mActivity.getClass().getMethod(funName, JSONObject.class);
+							if (exec != null) {
+								exec.invoke(mActivity, obj);
 	                		}
 						} catch (Exception e) {
 							// TODO 自动生成的 catch 块
@@ -145,15 +115,19 @@ public class MainWindow extends WebView {
 	                }
 	            });
         	}
-        }  
+        }
+        
+        /**
+         * 网页完成初始化时调用
+         */
     }
 
     /** 
      * 该方法在安卓调用，发送内容搞到浏览器 
      */ 
-    public void sendToWebView(String content) {
-    	if(content!=null)
-    		loadUrl("javascript:getFromAndroid('"+content+"')");//让浏览器调用getFromAndroid函数
+    public void sendToWebView(String funName, String data) {
+    	if(funName != null && data != null)
+    		loadUrl("javascript:" + funName + "(" + data + ")");//让浏览器调用getFromAndroid函数
     }
     
     /** 
@@ -178,8 +152,11 @@ public class MainWindow extends WebView {
 	    @Override
 	    public void onPageFinished(WebView view, String url) {
 	        //closeProgress();
-	    	if(mBeginningData!=null)
-	    		sendToWebView(mBeginningData);
+	    	String beginStr = "";
+	    	for (String key : mBeginningData.keySet()) {
+	    		beginStr += "\""+ key + "\"=\"" + mBeginningData.get(key) + "\",";
+	    	}
+	    	sendToWebView("initPage", "'{" + beginStr.substring(0, beginStr.length() - 1) + "}'"); 	
 	    }
 
 	    @Override

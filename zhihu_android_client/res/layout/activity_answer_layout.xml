@@ -3,7 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    
 
+    <EditText
+        android:id="@+id/editTextAnswer"
+        android:hint="@string/answerText"
+        style="@style/quizEditText" >
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/divider"
+        android:layout_gravity="bottom">
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:text="@string/anonymousA"
+            style="@style/checkBox" />
+   </LinearLayout>
 </RelativeLayout>

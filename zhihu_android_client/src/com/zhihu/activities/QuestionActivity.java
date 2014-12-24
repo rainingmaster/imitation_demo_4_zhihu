@@ -20,7 +20,8 @@ import com.zhihu.components.MainWindow;
  */
 public class QuestionActivity extends BaseActivity {
 	
-	private int mQuestionId;
+	private Integer mQuesId;//问题id
+	private String mQuesTitle;//问题标题
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,8 @@ public class QuestionActivity extends BaseActivity {
         Bundle bundle = this.getIntent().getExtras();
         
         /*获取Bundle中的数据，注意类型和key*/
-        mQuestionId = bundle.getInt("id");
-        String title = bundle.getString("title");
-        String bg_data = "{\"id\":\""+mQuestionId+"\", \"title\":\""+title+"\"}";
+        mQuesId = bundle.getInt("id");
+        mQuesTitle = bundle.getString("title");
 		
 		/*设置本页标题名称*/
 		mPageName="共80个回答";
@@ -41,7 +41,8 @@ public class QuestionActivity extends BaseActivity {
 		/*设置中央webview主体*/
 		mWebView = new MainWindow(this);
 		mWebView.loadUrl("file:///android_asset/question.html");
-		mWebView.setmBeginningData(bg_data);
+		mWebView.getBeginningData().put("id", mQuesId.toString());
+		mWebView.getBeginningData().put("title", mQuesTitle);
 		
 		setContent(mWebView);
 
@@ -50,9 +51,9 @@ public class QuestionActivity extends BaseActivity {
 		mTitle.setTextClickable(false);
 	}
 
-	private void jumpToAnswer() {
-		Intent intent = new Intent();	
-		intent.setClass(this, QuestionActivity.class);
+	public void jumpToAnswer(JSONObject data) {
+		Intent intent = new Intent();
+		intent.setClass(this, AnswerActivity.class);
 		startActivity(intent);
 	}
 

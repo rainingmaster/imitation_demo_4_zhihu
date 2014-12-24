@@ -4,7 +4,6 @@
   padding-top:5px;
   padding-bottom:5px;
 }
-#relative:hover{background-color: #0280E4;}
 #relative .topic{
   color: #0280E4;
   background-color: #D3EBF7;
@@ -84,10 +83,6 @@
   border-bottom: 1px solid #BBBBBB;
   border-top: 1px solid #BBBBBB;
 }
-#operate .oper_btn:hover {
-  color: #FFFFFF;
-  background-color: #0280E4;
-}
 #operate .oper_btn img{
   vertical-align:middle;
   padding-right:15px;
@@ -100,13 +95,9 @@
   padding: 8px;
   padding-bottom:10px;
 }
-.answer:hover {
-  color: #FFFFFF;
-  background-color: #0280E4;
-}
-.answer:hover .reply .agree {
-  color: #0280E4;
-  background-color: #FFFFFF;
+.answer .reply .touch {
+  color: #1F8EEA !important;
+  background-color: #FFFFFF !important;
 }
 .answer .replier .photo{
   float: left;

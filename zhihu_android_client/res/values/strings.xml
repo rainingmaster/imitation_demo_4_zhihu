@@ -9,9 +9,11 @@
     <string name="index">首页</string>
     <string name="question">问题</string>
     <string name="quesText">添加问题…</string>
+    <string name="answerText">写答案…</string>
     <string name="describe">描述</string>
     <string name="descText">添加问题的补充说明…</string>
     <string name="topic">话题</string>
-    <string name="anonymous">匿名提问</string>
+    <string name="anonymousQ">匿名提问</string>
+    <string name="anonymousA">匿名回答</string>
 
 </resources>

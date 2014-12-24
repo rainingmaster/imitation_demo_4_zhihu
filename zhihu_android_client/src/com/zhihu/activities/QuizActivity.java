@@ -35,14 +35,12 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 	private TextView[] mTextViews;
 	private int mPageCount;
 	private int mCurSel;
-	private String mServerIP;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         mPageName = "添加问题";
-        mServerIP = getResources().getString(R.string.server_ip);
 
         mTitle.setTitleText(mPageName);//部属上才能调整
 		mTitle.setTextClickable(false);
@@ -52,6 +50,7 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
         
         init();
         
+        /*test field*/
         CheckBox test = (CheckBox)findViewById(R.id.checkBox);
         test.setOnClickListener(new OnClickListener() {
 			

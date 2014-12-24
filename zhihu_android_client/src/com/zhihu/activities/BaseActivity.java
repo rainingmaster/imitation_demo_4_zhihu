@@ -44,6 +44,11 @@ public class BaseActivity extends Activity {
      * 左侧菜单状态，true为打开
      */
     protected Boolean mMenuState;
+
+    /**
+     * 服务器地址
+     */
+    protected String mServerIP;
 	
 	/**
     * 本app的名字
@@ -69,7 +74,9 @@ public class BaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mAppName=getResources().getString(R.string.app_name);
+		mAppName=getResources().getString(R.string.app_name);//设置app名字
+		
+        mServerIP = getResources().getString(R.string.server_ip);//设置IP地址
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_base_layout);
