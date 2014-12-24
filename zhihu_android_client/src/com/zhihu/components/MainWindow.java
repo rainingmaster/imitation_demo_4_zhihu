@@ -156,7 +156,11 @@ public class MainWindow extends WebView {
     		loadUrl("javascript:getFromAndroid('"+content+"')");//让浏览器调用getFromAndroid函数
     }
     
-    // 内部类
+    /** 
+     * 内部类,继承WebViewClient类 
+     * 对js弹出框时间进行处理 
+     *  
+     */
     final public class MyWebViewClient extends WebViewClient {
 	    // 如果页面中链接，如果希望点击链接继续在当前browser中响应，
 	    // 而不是新开Android的系统browser中响应该链接，必须覆盖 webview的WebViewClient对象。
@@ -186,7 +190,7 @@ public class MainWindow extends WebView {
     }
   
     /** 
-     * 继承WebChromeClient类 
+     * 内部类,继承WebChromeClient类 
      * 对js弹出框时间进行处理 
      *  
      */  
