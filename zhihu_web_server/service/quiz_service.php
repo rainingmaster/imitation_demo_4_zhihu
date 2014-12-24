@@ -1,27 +1,26 @@
 <?php
     /**
     *quiz_service.php
-    *提问服务接口
+    *鎻愰棶鏈嶅姟鎺ュ彛
     **/
     
     require_once($_SERVER['DOCUMENT_ROOT']."/log/log.class.php");
-	require_once($_SERVER['DOCUMENT_ROOT']."/conn/conn.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/model/question.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/dao/question_dao.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/model/question.php");
     
     $log = Log::get_instance();
-    $tag = "quiz_server report";
+    $tag = "quiz_server.php";
     
 	if(isset($_POST["title"], $_POST["content"])){
-		$title = $_POST["title"];//标题
-		$content = $_POST["content"];//内容
+		$title = $_POST["title"];//鏍囬
+		$content = $_POST["content"];//鍐呭
 		
-		$new_question = new question($title, $content, "11", date('Y-n-j H:m:s'), true);
+		$new_question = new question($title, $content, "11", '"' . date('Y-n-j H:m:s') . '""', true);
         $my_question_dao = new question_dao();
         $result = $my_question_dao->insert($new_question);
         
 		if (!$result){
-            $log->setError("insert into question is wrong", $tag);
+            $log->setError("insert into question is wrong", $tag . " line" . __LINE__);
 			echo "Error!";
 		}else{
 			echo "Success!";

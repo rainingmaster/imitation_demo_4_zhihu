@@ -1,43 +1,43 @@
 <?php
-define("LOG_FILE_PATH", $_SERVER['DOCUMENT_ROOT']."/log/zhihu_webserver_");
+define("LOG_FILE_PATH", $_SERVER['DOCUMENT_ROOT']."/log/zhihu_webserver");
 define("LOG_SWITCH", true);
 define("LOG_MAX_LEN", 500);
 
 /**
- * ÈÕÖ¾´¦ÀíÀà
+ * æ—¥å¿—å¤„ç†ç±»
  */
 
 class Log{
 
-    //µ¥ÀıÄ£Ê½
-    private static $instance    = NULL;
-    //ÎÄ¼ş¾ä±ú
-    private static $handle      = NULL;
-    //ÈÕÖ¾¿ª¹Ø
-    private $log_switch     = NULL;
-    //ÈÕÖ¾Ïà¶ÔÄ¿Â¼
-    private $log_file_path      = NULL;
-    //ÈÕÖ¾ÎÄ¼ş×î´ó³¤¶È£¬³¬³ö³¤¶ÈÖØĞÂ½¨Á¢ÎÄ¼ş
-    private $log_max_len        = NULL;
-    //ÈÕÖ¾ÎÄ¼şÇ°×º,Èë log_0
-    private $log_file_pre       = 'log_';
+    //å•ä¾‹æ¨¡å¼
+    private static $instance = NULL;
+    //æ–‡ä»¶å¥æŸ„
+    private static $handle = NULL;
+    //æ—¥å¿—å¼€å…³
+    private $log_switch = NULL;
+    //æ—¥å¿—ç›¸å¯¹ç›®å½•
+    private $log_file_path = NULL;
+    //æ—¥å¿—æ–‡ä»¶æœ€å¤§é•¿åº¦ï¼Œè¶…å‡ºé•¿åº¦é‡æ–°å»ºç«‹æ–‡ä»¶
+    private $log_max_len = NULL;
+    //æ—¥å¿—æ–‡ä»¶å‰ç¼€,å…¥ log_0
+    private $log_file_pre = '_log_';
 
         
     /**
-     * ¹¹Ôìº¯Êı
+     * æ„é€ å‡½æ•°
      */
-    protected function __construct(){//×¢Òâ£ºÒÔÏÂÊÇÅäÖÃÎÄ¼şÖĞµÄ³£Á¿
+    protected function __construct(){//æ³¨æ„ï¼šä»¥ä¸‹æ˜¯é…ç½®æ–‡ä»¶ä¸­çš„å¸¸é‡
 
-        $this->log_file_path     = LOG_FILE_PATH; //ÈÕÖ¾È«Â·¾¶
+        $this->log_file_path     = LOG_FILE_PATH; //æ—¥å¿—å…¨è·¯å¾„
 
-        $this->log_switch     = LOG_SWITCH; //ÈÕÖ¾¿ª¹Ø
+        $this->log_switch     = LOG_SWITCH; //æ—¥å¿—å¼€å…³
 
-        $this->log_max_len    = LOG_MAX_LEN; //µ¥¸öÎÄ¼şÈÕÖ¾×î´óÊıÁ¿
+        $this->log_max_len    = LOG_MAX_LEN; //å•ä¸ªæ–‡ä»¶æ—¥å¿—æœ€å¤§æ•°é‡
 
     }
 
     /**
-     * µ¥ÀûÄ£Ê½
+     * å•ä¾‹æ¨¡å¼
      */
     public static function get_instance(){
         if(!self::$instance instanceof self){
@@ -48,14 +48,14 @@ class Log{
 
     /**
      *
-     * ÈÕÖ¾¼ÇÂ¼
+     * æ—¥å¿—è®°å½•
      *
-     * @param int $type  0 -> ¼ÇÂ¼(NOTICE LOG) / 1 -> ´íÎó(ERROR LOG) / 2 -> ¸æ¾¯(WARM LOG)
-     * @param string $desc ¾ßÌåÊÂÏî
-     * @param string $tag  ÊÂÏî±êÊ¾
+     * @param int $type  0 -> è®°å½•(NOTICE LOG) / 1 -> é”™è¯¯(ERROR LOG) / 2 -> å‘Šè­¦(WARM LOG)
+     * @param string $tag  äº‹é¡¹æ ‡ç¤ºï¼Œç”¨äºåŒºåˆ†å“ªä¸ªé¡µé¢
+     * @param string $item å…·ä½“äº‹é¡¹
      *
      */
-    public function log($type = 0, $tag, $desc){
+    public function log($type = 0, $tag, $item){
         if($this->log_switch){
 
             if(self::$handle == NULL){
@@ -73,40 +73,41 @@ class Log{
                     $level = 'WARM LOG';
                     break;
             }
-            fwrite(self::$handle,  date("Y-m-d H:M:S "). ' ' . $level . ':' . ' ' . $tag . ' ' . $desc . chr(13));
+            $script_name = substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'));
+            fwrite(self::$handle,  date("Y-m-d H:M:S "). ' ' . $level . ':' . $tag . ' ' . $item . chr(13));
 
         }
     }
     
     /**
-     * ÌáĞÑÈÕÖ¾
-     * @param string $desc ¾ßÌåÊÂÏî
+     * æé†’æ—¥å¿—
+     * @param string $item å…·ä½“äº‹é¡¹
      *
      */
-    public function setNotice($desc, $tag = 'message') {
-        self::log(0, $tag, $desc);
+    public function setNotice($item, $tag = 'message') {
+        self::log(0, $tag, $item);
     }
     
     /**
-     * ´íÎóÈÕÖ¾
-     * @param string $desc ¾ßÌåÊÂÏî
+     * é”™è¯¯æ—¥å¿—
+     * @param string $item å…·ä½“äº‹é¡¹
      *
      */
-    public function setError($desc, $tag = 'message') {
-        self::log(1, $tag, $desc);
+    public function setError($item, $tag = 'message') {
+        self::log(1, $tag, $item);
     }
     
     /**
-     * ¾¯¸æÈÕÖ¾
-     * @param string $desc ¾ßÌåÊÂÏî
+     * è­¦å‘Šæ—¥å¿—
+     * @param string $item å…·ä½“äº‹é¡¹
      *
      */
-    public function setWarm($desc, $tag = 'message') {
-        self::log(2, $tag, $desc);
+    public function setWarm($item, $tag = 'message') {
+        self::log(2, $tag, $item);
     }
 
     /**
-     * »ñÈ¡µ±Ç°ÈÕÖ¾µÄ×îĞÂÎÄµµµÄºó×º
+     * è·å–å½“å‰æ—¥å¿—çš„æœ€æ–°æ–‡æ¡£çš„åç¼€
      *
      */
     private function get_max_log_file_suf(){
@@ -127,7 +128,7 @@ class Log{
                 if($log_file_suf == NULL){
                     $log_file_suf = 0;
                 }
-                //½Ø¶ÏÎÄ¼ş
+                //æˆªæ–­æ–‡ä»¶
                 if( file_exists($this->log_file_path . $this->log_file_pre . $log_file_suf) && filesize($this->log_file_path . $this->log_file_pre . $log_file_suf) >= $this->log_max_len){
                     $log_file_suf = intval($log_file_suf) + 1;
                 }
@@ -141,7 +142,7 @@ class Log{
     }
 
     /**
-     * ¹Ø±ÕÎÄ¼ş¾ä±ú
+     * å…³é—­æ–‡ä»¶å¥æŸ„
      *
      */
     public function close(){

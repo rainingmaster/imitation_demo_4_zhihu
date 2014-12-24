@@ -17,19 +17,21 @@
         }
         
         /**
-        * 往table中插入一条记录
+        * 往表中插入一条记录row
         * @param 需要插入的对象--其中对象类名要和表名对应
         **/
-        public function insert($table) {
-            if($this->model_name != get_class($table)) {//对比操作的对象类型是否正确
+        public function insert($row) {
+            if($this->model_name != get_class($row)) {//对比操作的对象类型是否正确
                 $this->log->setError("DAO is different from model", "base_dao");
                 return false;
             }
             $key_str = '(';
             $val_str = '(';
-            foreach ($table as $key => $value) {
-                $key_str = $key_str . $key . ',';
-                $val_str = $val_str . '"' . $value . '",';
+            foreach ($row as $key => $value) {
+                if(isNormalKey($key)) {//非自增长属性
+                    $key_str .= $key . ',';
+                    $val_str .= '"' . $value . '",';
+                }
             }
             $key_str = substr($key_str, 0, -1) . ')';
             $val_str = substr($val_str, 0, -1) . ')';
@@ -39,17 +41,46 @@
             //echo $query;
             $result = mysql_query($query);
             if (!$result){
-                $this->log->setError(mysql_errno() . ": " . mysql_error(), $this->model_name);
+                $this->log->setError("wrong in insert " . mysql_errno() . ": " . mysql_error(), $this->model_name . "_dao.php");
+				mysql_free_result($result);
                 return false;
             }
+			mysql_free_result($result);
             return true;
         }
         
         /**
-        * 往table中插入一条记录
-        * @param 需要插入的对象--其中对象类名要和表名对应
+        * 查找表中内容基础方法
+        * @param condition 查找条件
+		* @param attr  需要查找的属性
         **/
-        public function select($condition, $attr = "*") {
-            $query = "SELECT " . $attr . " FROM " . $this->model_name . " WHERE " . $condition . ";";
+        public function baseFind($condition = "", $attr = "*") {
+            $query = "SELECT " . $attr . " FROM " . $this->model_name;//. " WHERE " . $condition . ";";
+			if($condition == "") {
+				$query .= ";";
+			} else {
+				$query .= " WHERE " . $condition . ";";
+			}
+			
+			$result = mysql_query($query);
+            if (!$result){
+                $this->log->setError("wrong in select " . mysql_errno() . ": " . mysql_error(), $this->model_name . "_dao.php");
+				mysql_free_result($result);
+                return false;
+            }
+			
+			$ref = array();
+			while($row = mysql_fetch_object($result)) {
+				$ref[] = $row;
+				var_dump($row);
+			}
+			return $ref;
         }
+		
+		private function isNormalKey($key) {
+			if(strpos($key, '__auto') !== false) {//非自增长属性值
+                return true;
+            }
+            return false;
+		}
     }
