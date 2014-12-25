@@ -53,7 +53,7 @@
 	          android:background="@color/divider"
 	          android:layout_gravity="bottom">
 	          <CheckBox
-	              android:id="@+id/checkBox"
+	              android:id="@+id/checkBoxQ"
 	              android:text="@string/anonymousQ"
 	              style="@style/checkBox" />
 	     </LinearLayout>

@@ -103,10 +103,18 @@ public class MainWindow extends WebView {
 	                public void run() {
 						Method exec;
 	                	try {
-	                		JSONObject obj = new JSONObject(data);//转换为json
-							exec = mActivity.getClass().getMethod(funName, JSONObject.class);
-							if (exec != null) {
-								exec.invoke(mActivity, obj);
+	                		if(data != null && data.length() != 0) {
+		                		JSONObject obj = new JSONObject(data);//转换为json
+								exec = mActivity.getClass().getMethod(funName, JSONObject.class);
+								if (exec != null) {
+									exec.invoke(mActivity, obj);
+		                		}
+	                		}
+	                		else {
+								exec = mActivity.getClass().getMethod(funName);
+								if (exec != null) {
+									exec.invoke(mActivity);
+		                		}
 	                		}
 						} catch (Exception e) {
 							// TODO 自动生成的 catch 块
@@ -126,8 +134,9 @@ public class MainWindow extends WebView {
      * 该方法在安卓调用，发送内容搞到浏览器 
      */ 
     public void sendToWebView(String funName, String data) {
-    	if(funName != null && data != null)
-    		loadUrl("javascript:" + funName + "(" + data + ")");//让浏览器调用getFromAndroid函数
+    	if(funName != null) {
+    		loadUrl("javascript:" + funName + "(" + data + ")");//让浏览器调用getFromAndroid函数    	
+    	}
     }
     
     /** 
@@ -154,7 +163,7 @@ public class MainWindow extends WebView {
 	        //closeProgress();
 	    	String beginStr = "";
 	    	for (String key : mBeginningData.keySet()) {
-	    		beginStr += "\""+ key + "\"=\"" + mBeginningData.get(key) + "\",";
+	    		beginStr += "\""+ key + "\":\"" + mBeginningData.get(key) + "\",";
 	    	}
 	    	sendToWebView("initPage", "'{" + beginStr.substring(0, beginStr.length() - 1) + "}'"); 	
 	    }

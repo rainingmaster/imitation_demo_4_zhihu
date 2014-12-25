@@ -3,7 +3,7 @@ var TITLE_ID;//题目ID
 var TITLE;//问题题目
 
 function initPage(data) {//初始化页面
-    var json = eval(data);
+    var json = eval('('+data+')');
 	IP_ADDR = json.ip;
     TITLE_ID = json.id;
     TITLE = json.title;
@@ -130,7 +130,7 @@ function bindTouch() {
 
 function bindJump() {//绑定点击域
     $("#addanser").click(function(){
-      sendToAndroid("jumpToAnswer", "{id:111}");
+      sendToAndroid("jumpToAnswer");
     });
 }
 

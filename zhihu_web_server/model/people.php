@@ -7,6 +7,7 @@
     require_once("base_model.php");
     
     class people extends base_model{
+        public $id__auto;
         public $name;
         public $introduce;
         public $photo;

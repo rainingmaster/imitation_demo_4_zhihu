@@ -5,7 +5,8 @@
     **/
     
     require_once($_SERVER['DOCUMENT_ROOT']."/log/log.class.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/conn/conn.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/common/conn.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/common/tool.php");
      
     class base_dao{
         protected $model_name;
@@ -42,10 +43,9 @@
             $result = mysql_query($query);
             if (!$result){
                 $this->log->setError("wrong in insert " . mysql_errno() . ": " . mysql_error(), $this->model_name . "_dao.php");
-				mysql_free_result($result);
+                $this->log->setError("sql is '" . $query . "'", "------");
                 return false;
             }
-			mysql_free_result($result);
             return true;
         }
         
@@ -65,7 +65,7 @@
 			$result = mysql_query($query);
             if (!$result){
                 $this->log->setError("wrong in select " . mysql_errno() . ": " . mysql_error(), $this->model_name . "_dao.php");
-				mysql_free_result($result);
+                $this->log->setError("sql is '" . $query . "'", "------");
                 return false;
             }
 			
@@ -76,11 +76,18 @@
 			}
 			return $ref;
         }
-		
-		private function isNormalKey($key) {
-			if(strpos($key, '__auto') !== false) {//非自增长属性值
-                return true;
-            }
-            return false;
-		}
+        
+        /**
+        * 查找表中所有内容
+        **/
+        public function findAll() {
+            baseFind();
+        }
+        
+        /**
+        * 通过键值查找表中内容
+        **/
+        public function findById($k, $v) {
+            baseFind($k . "=" . $v);
+        }
     }

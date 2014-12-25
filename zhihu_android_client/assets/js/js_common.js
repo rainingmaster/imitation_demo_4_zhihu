@@ -51,5 +51,8 @@ function bindPullMore() {
 }
 
 function sendToAndroid(fun, data) {
-  window.AndroidFun.getFromWebView(fun, data);//设置成两个参数，第一个函数名，后面那个json参数
+    if(data == undefined)
+        window.AndroidFun.getFromWebView(fun, "");
+    else
+        window.AndroidFun.getFromWebView(fun, data);//设置成两个参数，第一个函数名，后面那个json参数
 }

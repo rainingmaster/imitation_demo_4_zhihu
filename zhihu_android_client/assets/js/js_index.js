@@ -1,7 +1,7 @@
 var IP_ADDR;//服务器IP地址
 
 function initPage(data) {
-    var json = eval(data);
+    var json = eval('('+data+')');
 	IP_ADDR = json.ip;
 }
 

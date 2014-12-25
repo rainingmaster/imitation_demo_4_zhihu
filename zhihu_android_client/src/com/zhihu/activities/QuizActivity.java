@@ -1,7 +1,9 @@
 package com.zhihu.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -13,6 +15,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.packet.zhihu.R;
+import com.zhihu.common.Common;
 import com.zhihu.components.ScrollLayout;
 import com.zhihu.components.OnViewChangeListener;
 import com.zhihu.components.BaseTitleBar;
@@ -51,13 +54,13 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
         init();
         
         /*test field*/
-        CheckBox test = (CheckBox)findViewById(R.id.checkBox);
+        CheckBox test = (CheckBox)findViewById(R.id.checkBoxQ);
         test.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
-				sentHttpClient();
+				submitQuestion();
 			}
 		});
     }
@@ -117,44 +120,22 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
 		setCurPoint(pos);
 		mScrollLayout.snapToScreen(pos);
 	}
-	
-	private void sentHttpClient() {
-		/*声明网址字符串*/
-        String uriAPI = "http://" + mServerIP + "/service/quiz_service.php";
-        /*建立HTTP Post联机*/
-        HttpPost httpRequest = new HttpPost(uriAPI); 
-        /*获得内容*/
+
+	/**
+	 * 提交问题
+	 */
+	private void submitQuestion() {
+        String url = "http://" + mServerIP + "/service/submit_quiz_service.php";
+
         EditText title = (EditText) findViewById(R.id.editTextTitle);
         EditText content = (EditText) findViewById(R.id.editTextDesc);
-        /*
-         * Post运作传送变量必须用NameValuePair[]数组储存
-        */
-        List <NameValuePair> params = new ArrayList <NameValuePair>(); 
-        params.add(new BasicNameValuePair("title", title.getText().toString().trim()));
-        params.add(new BasicNameValuePair("content", content.getText().toString().trim()));
-        try 
-        { 
-          /*发出HTTP request*/
-          httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8)); 
-          /*取得HTTP response*/
-          HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest); 
-          /*若状态码为200 ok*/
-          int code = httpResponse.getStatusLine().getStatusCode();
-          if(code == 200)
-          { 
-            /*取出响应字符串*/
-            String strResult = EntityUtils.toString(httpResponse.getEntity()); 
-            //mTextView1.setText(strResult); 
-          } 
-          else 
-          { 
-            //mTextView1.setText("Error Response: "+httpResponse.getStatusLine().toString()); 
-          } 
-        }
-        catch (Exception e) 
-        {  
-          //mTextView1.setText(e.getMessage().toString()); 
-          e.printStackTrace();  
-        }  
+        Map<String, String> attr = new HashMap<String, String>();
+        
+        attr.put("title", title.getText().toString().trim());
+        attr.put("content", content.getText().toString().trim());
+        attr.put("user_id", "10000");
+        
+        
+        Common.sentHttpClient(url, attr);
 	}
 }

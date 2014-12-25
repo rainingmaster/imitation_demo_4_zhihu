@@ -7,7 +7,8 @@
     require_once("base_model.php");
     
     class comment extends base_model{
+        public $id__auto;
         public $content;
-        public $user_id;
+        public $replier_id;
         public $init_time;
     }

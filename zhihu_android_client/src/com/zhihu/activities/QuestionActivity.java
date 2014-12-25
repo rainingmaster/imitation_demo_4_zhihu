@@ -51,8 +51,13 @@ public class QuestionActivity extends BaseActivity {
 		mTitle.setTextClickable(false);
 	}
 
-	public void jumpToAnswer(JSONObject data) {
+	public void jumpToAnswer() {
+		Bundle bundle = new Bundle();
+		
+		bundle.putInt("id", mQuesId);
+		
 		Intent intent = new Intent();
+		intent.putExtras(bundle);
 		intent.setClass(this, AnswerActivity.class);
 		startActivity(intent);
 	}
