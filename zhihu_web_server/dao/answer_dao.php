@@ -5,7 +5,7 @@
     **/
     
     require_once("base_dao.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/model/question.php"); 
+    require_once($_SERVER['DOCUMENT_ROOT']."/model/answer.php"); 
     
     class answer_dao extends base_dao{
     }

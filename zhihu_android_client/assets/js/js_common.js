@@ -2,7 +2,7 @@ var refLock = false;//刷新锁
 var REFRESH = 45;//刷新有效距离
 var positionY;//点击Y坐标
 
-function getNew() {//获取最新，将在顶部
+function getFresh() {//获取最新，将在顶部
     if (!refLock) {
         refLock = true;
         refresh("new");
@@ -22,13 +22,15 @@ function getMore() {//获取更多，将在底部加入
 function handleTouchEvent(event) {//处理点击的句柄
     switch (event.type) {
         case "touchstart":
-            //$("#1001").html("Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")");
-            positionY = event.touches[0].clientY;
+            if($(document).scrollTop() == 0) {
+                //$("#1001").html("Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")");
+                positionY = event.touches[0].clientY;
+            }
             break;
         case "touchmove":
             //需要做下拉时的动画，并告诉android的titlebar改变
-            if (positionY + REFRESH <= event.changedTouches[event.changedTouches.length - 1].clientY) {
-                getNew();//获取新的
+            if (positionY + REFRESH <= event.changedTouches[event.changedTouches.length - 1].clientY && $(document).scrollTop() == 0) {
+                getFresh();//获取新的
             }
             break;
     }
@@ -44,7 +46,7 @@ function bindDropNew() {
 */
 function bindPullMore() {
     $(document).scroll( function() { //判断拉到底部时的动作
-        if($(document).scrollTop() + $(window).height() >= $(document).height()){//判断到底，可能需要增加一定缓冲范围刷新
+        if($(document).scrollTop() + $(window).height() >= $(document).height() - 20){//判断到底，需要增加一定缓冲范围刷新，为20px
             getMore();//获取更多
         }
     } )

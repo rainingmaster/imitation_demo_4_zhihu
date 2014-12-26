@@ -39,7 +39,7 @@
             
             //字符拼接
             $query = "INSERT INTO " . $this->model_name . $key_str . " VALUES" . $val_str . ";";
-            //echo $query;
+            
             $result = mysql_query($query);
             if (!$result){
                 $this->log->setError("wrong in insert " . mysql_errno() . ": " . mysql_error(), $this->model_name . "_dao.php");
@@ -70,24 +70,39 @@
             }
 			
 			$ref = array();
-			while($row = mysql_fetch_object($result)) {
+			while($row = mysql_fetch_assoc($result)) {
 				$ref[] = $row;
-				var_dump($row);
 			}
 			return $ref;
+        }
+        
+        /**
+        * 查找表中内容
+        **/
+        public function find($condition = "", $attr = "*") {
+            return $this->baseFind($condition, $attr);
         }
         
         /**
         * 查找表中所有内容
         **/
         public function findAll() {
-            baseFind();
+            return $this->baseFind();
+        }
+        
+        /**
+        * 通过键值查找表中单个内容(如果是有多个重复则获得第一个)
+        **/
+        public function findOneByValue($k, $v) {
+            $ref = $this->baseFind($k . "=" . $v . " LIMIT 1");
+            return $ref[0];
         }
         
         /**
         * 通过键值查找表中内容
         **/
-        public function findById($k, $v) {
-            baseFind($k . "=" . $v);
+        public function findByValue($k, $v) {
+            return $this->baseFind($k . "=" . $v);
         }
+        
     }

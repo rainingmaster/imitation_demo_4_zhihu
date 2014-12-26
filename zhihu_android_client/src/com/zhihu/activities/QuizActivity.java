@@ -22,6 +22,7 @@ import com.zhihu.components.BaseTitleBar;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -33,7 +34,7 @@ import android.widget.TextView;
 
 public class QuizActivity extends BaseActivity  implements OnViewChangeListener, OnClickListener{
 
-
+	public Handler mWebHandler;//处理web提交的句柄
 	private ScrollLayout mScrollLayout;
 	private TextView[] mTextViews;
 	private int mPageCount;
@@ -135,7 +136,7 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
         attr.put("content", content.getText().toString().trim());
         attr.put("user_id", "10000");
         
-        
-        Common.sentHttpClient(url, attr);
+        Common sender = new Common();
+        sender.sentHttpClient(url, attr, mWebHandler);
 	}
 }

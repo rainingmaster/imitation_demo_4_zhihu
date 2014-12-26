@@ -7,14 +7,17 @@ import com.packet.zhihu.R;
 import com.zhihu.common.Common;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class AnswerActivity extends BaseActivity {
+	public Handler mWebHandler;//处理web提交的句柄
 	private Integer mQuesId;//问题id
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +36,14 @@ public class AnswerActivity extends BaseActivity {
         
         View content_view = View.inflate(this, R.layout.activity_answer_layout, null);
         setContent(content_view);
+        
+        mWebHandler = new Handler(){
+        	public void handleMessage(Message msg){
+				String message=(String)msg.obj;//obj不一定是String类，可以是别的类，看用户具体的应用
+				//根据message中的信息对主线程的UI进行改动
+        	}
+
+        };
         
         /*test field*/
         CheckBox test = (CheckBox)findViewById(R.id.checkBoxA);
@@ -57,8 +68,9 @@ public class AnswerActivity extends BaseActivity {
         
         attr.put("question_id", mQuesId.toString());
         attr.put("content", answer.getText().toString().trim());
-        attr.put("user_id", "10000");//需要获得用户id
+        attr.put("user_id", "11");//需要获得用户id
         
-        Common.sentHttpClient(url, attr);
+        Common sender = new Common();
+        sender.sentHttpClient(url, attr, mWebHandler);
 	}
 }
