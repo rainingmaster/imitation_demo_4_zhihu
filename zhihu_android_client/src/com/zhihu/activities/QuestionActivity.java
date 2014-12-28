@@ -59,7 +59,7 @@ public class QuestionActivity extends BaseActivity {
 		Intent intent = new Intent();
 		intent.putExtras(bundle);
 		intent.setClass(this, AnswerActivity.class);
-		startActivity(intent);
+		jumpActivity(intent);
 	}
 
 

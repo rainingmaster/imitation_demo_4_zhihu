@@ -64,7 +64,7 @@ public class IndexActivity extends BaseActivity {
 		/*把bundle对象assign给Intent*/
 		intent.putExtras(bundle);
 		intent.setClass(this, QuestionActivity.class);
-		startActivity(intent);
+		jumpActivity(intent);
 	}
 
 }

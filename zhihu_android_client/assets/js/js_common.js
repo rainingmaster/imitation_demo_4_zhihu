@@ -36,6 +36,9 @@ function handleTouchEvent(event) {//处理点击的句柄
     }
 }
 
+/**
+*顶端下拉更新方法
+*/
 function bindDropNew() {
     document.addEventListener("touchstart", handleTouchEvent, false);
     document.addEventListener("touchmove", handleTouchEvent, false);

@@ -22,11 +22,8 @@ public class ScrollLayout extends ViewGroup{
     private int mPageWidth;
     private int mPageCount;//页数
     private float mLastMotionX;
- //   private int mTouchSlop;							
-    
-//    private static final int TOUCH_STATE_REST = 0;
-//    private static final int TOUCH_STATE_SCROLLING = 1;
-//    private int mTouchState = TOUCH_STATE_REST;
+    private float mLastTapX;
+    private float mLastTapY;
     
     private OnViewChangeListener mOnViewChangeListener;	 
 	public ScrollLayout(Context context) {
@@ -129,21 +126,28 @@ public class ScrollLayout extends ViewGroup{
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
 		// TODO 自动生成的方法存根
-		final int action = event.getAction(); 
+		final int action = event.getAction();
+        final float x = event.getX();    
+        final float y = event.getY();
 		
-		switch (action) {    
+		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 			onTouchEvent(event);
+			mLastTapX = x;
+			mLastTapY = y;
 			return false;
 		    
 		case MotionEvent.ACTION_MOVE:
 			onTouchEvent(event);
-			return true;  
+			if(Math.abs(mLastTapX - x) < 3 && Math.abs(mLastTapY - y) < 3) {//移动幅度小的则传到
+				return false;
+			}
+			return true; 
 		case MotionEvent.ACTION_UP:
 			onTouchEvent(event);
 			return false;
-		}    	            
-		return true;    
+		}
+		return false;    
 	}
 
 	@Override
@@ -174,7 +178,7 @@ public class ScrollLayout extends ViewGroup{
   		            	mVelocityTracker.addMovement(event); 
   		         }   
   	             mLastMotionX = x;     
-  	             scrollBy(deltaX, 0);	
+  	             scrollBy(deltaX, 0);
         	   }
          
 	           break;    	                
@@ -191,7 +195,7 @@ public class ScrollLayout extends ViewGroup{
 	                //Log.e(TAG, "snap left");    
 	                snapToScreen(mCurScreen - 1);       
 	            } else if (velocityX < -SNAP_VELOCITY       
-	                    && mCurScreen < mPageCount - 2) {       
+	                    && mCurScreen < mPageCount - 1) {       
 	                // Fling enough to move right       
 	                //Log.e(TAG, "snap right");    
 	                snapToScreen(mCurScreen + 1);
@@ -202,11 +206,10 @@ public class ScrollLayout extends ViewGroup{
 	            if (mVelocityTracker != null) {       
 	                mVelocityTracker.recycle();       
 	                mVelocityTracker = null;       
-	            }       
-	      //      mTouchState = TOUCH_STATE_REST;
+	            }
 	            break;      
 	        }    	            
-	        return true;    
+	        return true;
 	}
 	
 	private boolean IsCanMove(int deltaX)

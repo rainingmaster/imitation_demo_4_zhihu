@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.packet.zhihu.R;
+import com.zhihu.activities.BaseActivity;
+import com.zhihu.activities.QuestionActivity;
+import com.zhihu.activities.QuizActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +20,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -82,6 +88,32 @@ public class LeftDrawer extends DrawerLayout{
                 new String[] {"menuimage","menutext"}, 
                 new int[] {R.id.menuimage, R.id.menutext});
         mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO 自动生成的方法存根
+				//可以在这做一个自定义的回调函数，然后该控件被其他地方调用时要实现回调函数的接口
+				//在这由于是实现一个具体的控件，所以写死了
+				BaseActivity activity = (BaseActivity) mContext;
+				switch(position){
+				case 1://首页
+					break;
+				case 2://
+					break;
+				case 3:
+					break;
+				case 6: {//提问
+					Intent intent = new Intent();
+					intent.setClass(mContext, QuizActivity.class);
+					activity.jumpActivity(intent);
+				}
+					break;
+				}
+				closeDrawer();
+			}
+		});
         
         //mDrawerList.setSelection(0);//默认选中第一个
 	}

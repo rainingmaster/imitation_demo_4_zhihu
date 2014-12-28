@@ -70,6 +70,8 @@ function refresh(tag) { //刷新页面，将从服务端获得最新/更多内�
                 $("#main").html("");//清空
             }
             addList(json);
+            bindJump();
+            bindTouch();//绑定点击时效果，每次更新需要重新绑定
             refLock = false;//解刷新锁
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -87,6 +89,7 @@ function addList(json) {//将获取到的内容从底部加入
     }
 }
 
+//绑定点击时效果
 function bindTouch() {
     /*introduce模块*/
     $(".introduce").bind("touchstart", function(){
@@ -115,7 +118,10 @@ function bindTouch() {
     });
 }
 
-function bindJump() {//绑定点击域
+/**
+*绑定点击域
+*/
+function bindJump() {
     //绑定点击Introduce域
     //绑定点击Title域
     $(".title").click(function(){
@@ -138,7 +144,7 @@ $(document).ready(function(){
     /********end 测试区域*********/
     bindJump();
     
-    bindDropNew();//绑定下拉刷新，按需绑定
-    bindPullMore();//绑定到底刷新，按需绑定
-    bindTouch();//绑定点击时效果
+    bindDropNew();//按需绑定
+    bindPullMore();//按需绑定
+    bindTouch();//每次更新需要绑定
 });

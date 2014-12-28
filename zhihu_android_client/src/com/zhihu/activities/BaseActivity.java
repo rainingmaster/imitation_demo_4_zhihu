@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.KeyEvent;
@@ -172,20 +173,28 @@ public class BaseActivity extends Activity {
 	}
 
     /** 
-     * 如果不做任何处理，浏览网页，点击系统“Back”键，整个Browser会调用finish()而结束自身 
-     * 如果希望浏览的网 页回退而不是退出浏览器，需要在当前Activity中处理并消费掉该Back事件。
-     *  
+     * 设置在接收到按返回键时退出本activity，并执行动画
      */
+	@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-    	if (mWebView != null) {
-	        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {  
-	        	mWebView.goBack();  
-	            return true;  
-	        }
-    	}
-        return super.onKeyDown(keyCode, event); 
+		if (keyCode == KeyEvent.KEYCODE_BACK){
+	    	finish();
+	        overridePendingTransition(R.anim.not_move, R.anim.out_to_right);
+	        return true;
+		}
+        return super.onKeyDown(keyCode, event);
     }
-
+	
+	/**
+	 * 自定义的startActivity(intent);
+	 * 实现跳转时有动画
+	 */
+	public void jumpActivity(Intent intent) {
+		startActivity(intent);
+		//设置切换动画，从右边进入，左边退出
+        overridePendingTransition(R.anim.in_from_right, R.anim.not_move);
+	}
+    
     /** 
      * 设置activity的标题栏 
      * @param 标题栏对象
