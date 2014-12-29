@@ -2,7 +2,7 @@
 <resources>
     
     <!-- 相关配置 -->
-    <string name="server_ip">192.168.0.100</string>
+    <string name="server_ip">rainmaster.sinaapp.com</string>
 
     <string name="app_name">知乎</string>
     <string name="action_settings">设置</string>

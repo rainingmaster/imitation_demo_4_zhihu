@@ -23,6 +23,7 @@ import com.zhihu.components.BaseTitleBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -53,6 +54,14 @@ public class QuizActivity extends BaseActivity  implements OnViewChangeListener,
         setContent(content_view);
         
         init();
+        
+        mWebHandler = new Handler(){
+        	public void handleMessage(Message msg){
+				String message=(String)msg.obj;//obj不一定是String类，可以是别的类，看用户具体的应用
+				//根据message中的信息对主线程的UI进行改动
+        	}
+
+        };
         
         /*test field*/
         CheckBox test = (CheckBox)findViewById(R.id.checkBoxQ);

@@ -1,4 +1,4 @@
-var IP_ADDR = "192.168.30.38";//服务器IP地址
+var IP_ADDR = "rainmaster.sinaapp.com";//服务器IP地址
 
 function initPage(data) {
     var json = eval('('+data+')');
@@ -33,7 +33,7 @@ function initRow(json_row) {
             break;
     }
     var action_span = $('<span class="action">'+action_str+'</span>');
-    var photo_img = $('<img class="photo" src="'+json_row.people.photo+'" />')
+    var photo_img = $('<img class="photo" src="'+json_row.people.photo+'" />');
     var title_div = $('<div class="title">'+json_row.title+'</div>');
     if (typeof(json_row.answer) != "undefined") {
         var answer_div = $('<div class="answer"></div>');

@@ -8,6 +8,8 @@
     header("Access-Control-Allow-Origin:*");//启用CORS，允许跨站访问
     header("Content-Type:text/html;charset=utf-8");
     
+    require_once($_SERVER['DOCUMENT_ROOT']."/common/pub_value.php");
+    
     require_once($_SERVER['DOCUMENT_ROOT']."/dao/action_dao.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/dao/question_dao.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/dao/answer_dao.php");
@@ -30,7 +32,7 @@
     *   people:{
     *       id:11,
     *       name:"tempoo",
-    *       photo:'http://'.$_SERVER['SERVER_ADDR'].'/img/tt.png',//需要自己拼接
+    *       photo:'http://'.SERVER_ADDR.'/img/tt.png',//需要自己拼接
     *   }
     *   answer:{
     *        agree_count:132,
@@ -40,7 +42,7 @@
     */
     for ($i = 0, $l = count($action_list); $i < $l; $i++) { //需要unset一些属性，减少不必要传输的内容
         $people = $my_people_dao->findOneByValue("id", $action_list[$i]["initiator_id"]);
-        $people["photo"] = 'http://'.$_SERVER['SERVER_ADDR'].'/img/'.$people["photo"].'.png';
+        $people["photo"] = 'http://'.SERVER_ADDR.'/img/'.$people["photo"].'.png';
         switch($action_list[$i]["type"]) {
             case 0:{//赞同回答
                 break;

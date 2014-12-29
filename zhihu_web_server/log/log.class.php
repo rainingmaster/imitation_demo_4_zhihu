@@ -55,7 +55,9 @@ class Log{
      * @param string $item 具体事项
      *
      */
-    public function log($type = 0, $tag, $item){
+    
+    /******************由于移植到sae上不支持fwrite等操作(正常)，采用sae_debug来记录日志**********************/
+    /*public function log($type = 0, $tag, $item){
         if($this->log_switch){
 
             if(self::$handle == NULL){
@@ -77,6 +79,23 @@ class Log{
             fwrite(self::$handle,  date("Y-m-d H:M:S "). ' ' . $level . ':' . $tag . ' ' . $item . chr(13));
 
         }
+    }*/
+    
+    //新的sae上的log
+    public function log($type = 0, $tag, $item){
+            switch($type){
+                case 0:
+                    $level = 'NOTICE LOG';
+                    break;
+                case 1:
+                    $level = 'ERROR LOG';
+                    break;
+                case 2:
+                    $level = 'WARM LOG';
+                    break;
+            }
+            $script_name = substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'));
+            sae_debug(date("Y-m-d H:M:S "). ' ' . $level . ':' . $tag . ' ' . $item . chr(13));
     }
     
     /**
